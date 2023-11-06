@@ -5,5 +5,5 @@
  * @author Erik
  *
  */
-module tpg {
+module ServerTcpConcorrente {
 }
