@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Button;
 
 public class baseView extends JFrame {
 
 	private JPanel contentPane;
-	private ImageIcon sfondo;
+	private Image sfondo;
 	private JLabel sfondoLabel;
 
 	/**
@@ -43,13 +44,15 @@ public class baseView extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		Image image = null;
+		sfondo = null;
 	    try {
-	        image = ImageIO.read(new File("src/immagini/sfondo.png")).getScaledInstance(800, 800, Image.SCALE_SMOOTH);
+	        sfondo = ImageIO.read(new File("src/immagini/sfondo.png")).getScaledInstance(800, 800, Image.SCALE_SMOOTH);
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    JLabel sfondoLabel = new JLabel(new ImageIcon(image));
+	    contentPane.setLayout(null);
+	    sfondoLabel = new JLabel(new ImageIcon(sfondo));
+	    sfondoLabel.setBounds(218, 10, 0, 0);
 		contentPane.add(sfondoLabel);
 		
 		setContentPane(contentPane);
