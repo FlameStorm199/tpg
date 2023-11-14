@@ -15,11 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+import control.baseControl;
+
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -36,7 +40,7 @@ import java.awt.event.MouseMotionAdapter;
 
 public class baseView extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane=new JPanel();
 	private ImageIcon sfondo;
 	private JLabel sfondoLabel;
 	private JPanel panel;
@@ -54,22 +58,13 @@ public class baseView extends JFrame {
 	private JLabel D3;
 	private JLabel portiereFermoLabel;
 	private ImageIcon portiereFermo;
+	private BufferedImage portiereTuffo;
+	private JLabel labelPortiereTuffo;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					baseView frame = new baseView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -77,7 +72,6 @@ public class baseView extends JFrame {
 	public baseView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		
@@ -101,13 +95,13 @@ public class baseView extends JFrame {
 		panel.setLayout(new GridLayout(3, 4, 0, 0));
 		
 		A1 = new JLabel("");
-		A1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				A1.setOpaque(true);
-				A1.setBackground(Color.YELLOW);
-			}
-		});
+//		A1.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				A1.setOpaque(true);
+//				A1.setBackground(Color.YELLOW);
+//			}
+//		});
 		A1.setHorizontalAlignment(SwingConstants.CENTER);
 		A1.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(A1);
@@ -247,4 +241,110 @@ public class baseView extends JFrame {
 		
 		setContentPane(contentPane);
 	}
+	
+	public void registraEvento(baseControl c) {
+		A1.addMouseListener(c);
+		B1.addMouseListener(c);
+		C1.addMouseListener(c);
+		D1.addMouseListener(c);
+		A2.addMouseListener(c);
+		B2.addMouseListener(c);
+		C2.addMouseListener(c);
+		D2.addMouseListener(c);
+		A3.addMouseListener(c);
+		B3.addMouseListener(c);
+		C3.addMouseListener(c);
+		D3.addMouseListener(c);
+	}
+
+	public JLabel getA2() {
+		return A2;
+	}
+
+	public JLabel getA1() {
+		return A1;
+	}
+
+	public JLabel getB1() {
+		return B1;
+	}
+
+	public JLabel getD1() {
+		return D1;
+	}
+
+	public JLabel getC1() {
+		return C1;
+	}
+
+	public JLabel getB2() {
+		return B2;
+	}
+
+	public JLabel getB3() {
+		return B3;
+	}
+
+	public JLabel getC2() {
+		return C2;
+	}
+
+	public JLabel getD2() {
+		return D2;
+	}
+
+	public JLabel getA3() {
+		return A3;
+	}
+
+	public JLabel getC3() {
+		return C3;
+	}
+
+	public JLabel getD3() {
+		return D3;
+	}
+
+	public void muoviPortiere(String pos) {
+		// TODO Auto-generated method stub
+		portiereFermoLabel.setVisible(false);
+		if(pos.equals("a1")) {
+			try {
+				BufferedImage portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//portiereTuffo=rotate(portiereTuffo, -70);
+			labelPortiereTuffo=new JLabel();
+			labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
+			contentPane.add(labelPortiereTuffo);
+		}
+	}
+	
+	public static BufferedImage rotate(BufferedImage buffered, int i) {
+	    double sin = Math.abs(Math.sin(Math.toRadians(i))),
+	           cos = Math.abs(Math.cos(Math.toRadians(i)));
+	    int w = buffered.getWidth();
+	    int h = buffered.getHeight();
+	    int neww = (int) Math.floor(w*cos + h*sin),
+	        newh = (int) Math.floor(h*cos + w*sin);
+	    BufferedImage rotated = new BufferedImage(neww, newh, buffered.getType());
+	    Graphics2D graphic = rotated.createGraphics();
+	    graphic.translate((neww-w)/2, (newh-h)/2);
+	    graphic.rotate(Math.toRadians(i), w/2, h/2);
+	    graphic.drawRenderedImage(buffered, null);
+	    graphic.dispose();
+	    return rotated;
+	}
+	
+	public static BufferedImage imageIconToBufferedImage(ImageIcon icon) {
+        BufferedImage bufferedImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics graphics = bufferedImage.createGraphics();
+        icon.paintIcon(null, graphics, 0, 0);
+        graphics.dispose();
+        return bufferedImage;
+    }
+	
 }
