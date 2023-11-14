@@ -80,8 +80,11 @@ public class baseView extends JFrame {
 		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondo.png").getImage().getScaledInstance(880, 830, Image.SCALE_DEFAULT));
 		sfondoLabel.setIcon(sfondo);
 		
-		
 		portiereFermo=new ImageIcon(new ImageIcon("src/immagini/portiereFermo.png").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+		
+		labelPortiereTuffo=new JLabel("");
+		contentPane.add(labelPortiereTuffo);
+		
 		portiereFermoLabel=new JLabel("");
 		portiereFermoLabel.setBounds(646, 53, 850, 781);
 		portiereFermoLabel.setIcon(portiereFermo);
@@ -310,15 +313,15 @@ public class baseView extends JFrame {
 		portiereFermoLabel.setVisible(false);
 		if(pos.equals("a1")) {
 			try {
-				BufferedImage portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
+				portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//portiereTuffo=rotate(portiereTuffo, -70);
-			labelPortiereTuffo=new JLabel();
-			labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
-			contentPane.add(labelPortiereTuffo);
+			//portiereTuffo=rotate(portiereTuffo, 180);
+			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
+			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
+			labelPortiereTuffo.setBounds(300, 53, 850, 781);
 		}
 	}
 	
