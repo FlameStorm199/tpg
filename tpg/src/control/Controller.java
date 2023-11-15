@@ -7,14 +7,17 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import view.baseView;
+import model.Client;
+import view.Window;
 
-public class baseControl implements ActionListener, MouseListener, KeyListener{
+public class Controller implements ActionListener, MouseListener, KeyListener{
 	
-	private baseView v;
+	private Window v;
+	private Client client;
 	
-	public baseControl(baseView v) {
+	public Controller(Window v, Client client) {
 		this.v = v;
+		this.client = client;
 		v.registraEvento(this);
 	}
 
@@ -40,6 +43,9 @@ public class baseControl implements ActionListener, MouseListener, KeyListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == v.getA1()) {
+			//TODO: Richiamare questo metodo dopo l'ok del server, prima magari mostrare "in attesa dell'attaccante"?
+			//TODO: Implementare pulsante per chiudere la connessione
+			//this.client.sendMessage();
 			v.muoviPortiere("a1");
 		}
 	}
@@ -71,7 +77,6 @@ public class baseControl implements ActionListener, MouseListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import control.baseControl;
+import control.Controller;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
@@ -38,38 +39,20 @@ import java.awt.BorderLayout;
 import javax.swing.ButtonGroup;
 import java.awt.event.MouseMotionAdapter;
 
-public class baseView extends JFrame {
+public class Window extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane=new JPanel();
 	private ImageIcon sfondo;
 	private JLabel sfondoLabel;
 	private JPanel panel;
-	private JLabel A2;
-	private JLabel A1;
-	private JLabel B1;
-	private JLabel D1;
-	private JLabel C1;
-	private JLabel B2;
-	private JLabel B3;
-	private JLabel C2;
-	private JLabel D2;
-	private JLabel A3;
-	private JLabel C3;
-	private JLabel D3;
+	private JLabel A1, A2, A3, B1, B2, B3, C1, C2, C3, D1, D2, D3;
 	private JLabel portiereFermoLabel;
 	private ImageIcon portiereFermo;
 	private BufferedImage portiereTuffo;
 	private JLabel labelPortiereTuffo;
-
-	/**
-	 * Launch the application.
-	 */
 	
-
-	/**
-	 * Create the frame.
-	 */
-	public baseView() {
+	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -245,7 +228,7 @@ public class baseView extends JFrame {
 		setContentPane(contentPane);
 	}
 	
-	public void registraEvento(baseControl c) {
+	public void registraEvento(Controller c) {
 		A1.addMouseListener(c);
 		B1.addMouseListener(c);
 		C1.addMouseListener(c);
@@ -349,5 +332,4 @@ public class baseView extends JFrame {
         graphics.dispose();
         return bufferedImage;
     }
-	
 }
