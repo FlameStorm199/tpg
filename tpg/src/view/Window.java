@@ -18,6 +18,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import control.Controller;
+import control.ControllerFinestraIniziale;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
