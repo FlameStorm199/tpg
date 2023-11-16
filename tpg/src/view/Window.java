@@ -47,7 +47,7 @@ public class Window extends JFrame {
 	private ImageIcon sfondo;
 	private JLabel sfondoLabel;
 	private JPanel panel;
-	private JLabel A1, A2, A3, B1, B2, B3, C1, C2, C3, D1, D2, D3;
+	private JLabel A1, B1, C1, A2, B2, C2, A3, B3, C3, A4, B4, C4;
 	private JLabel portiereFermoLabel;
 	private ImageIcon portiereFermo;
 	private BufferedImage portiereTuffo;
@@ -93,42 +93,6 @@ public class Window extends JFrame {
 		A1.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(A1);
 		
-		B1 = new JLabel("");
-		B1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		B1.setBackground(new Color(255, 0, 0));
-		B1.setForeground(new Color(0, 0, 0));
-		B1.setHorizontalAlignment(SwingConstants.CENTER);
-		B1.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(B1);
-		
-		C1 = new JLabel("");
-		C1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		C1.setBackground(new Color(255, 0, 0));
-		C1.setForeground(new Color(0, 0, 0));
-		C1.setHorizontalAlignment(SwingConstants.CENTER);
-		C1.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(C1);
-		
-		D1 = new JLabel("");
-		D1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		D1.setBackground(new Color(255, 0, 0));
-		D1.setForeground(new Color(0, 0, 0));
-		D1.setHorizontalAlignment(SwingConstants.CENTER);
-		D1.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(D1);
-		
 		A2 = new JLabel("");
 		A2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -140,42 +104,6 @@ public class Window extends JFrame {
 		A2.setHorizontalAlignment(SwingConstants.CENTER);
 		A2.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(A2);
-		
-		B2 = new JLabel("");
-		B2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		B2.setBackground(new Color(255, 0, 0));
-		B2.setForeground(new Color(0, 0, 0));
-		B2.setHorizontalAlignment(SwingConstants.CENTER);
-		B2.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(B2);
-		
-		C2 = new JLabel("");
-		C2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		C2.setBackground(new Color(255, 0, 0));
-		C2.setForeground(new Color(0, 0, 0));
-		C2.setHorizontalAlignment(SwingConstants.CENTER);
-		C2.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(C2);
-		
-		D2 = new JLabel("");
-		D2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-		});
-		D2.setBackground(new Color(255, 0, 0));
-		D2.setForeground(new Color(0, 0, 0));
-		D2.setHorizontalAlignment(SwingConstants.CENTER);
-		D2.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(D2);
 		
 		A3 = new JLabel("");
 		A3.addMouseListener(new MouseAdapter() {
@@ -189,6 +117,42 @@ public class Window extends JFrame {
 		A3.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(A3);
 		
+		A4 = new JLabel("");
+		A4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		A4.setBackground(new Color(255, 0, 0));
+		A4.setForeground(new Color(0, 0, 0));
+		A4.setHorizontalAlignment(SwingConstants.CENTER);
+		A4.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(A4);
+		
+		B1 = new JLabel("");
+		B1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		B1.setBackground(new Color(255, 0, 0));
+		B1.setForeground(new Color(0, 0, 0));
+		B1.setHorizontalAlignment(SwingConstants.CENTER);
+		B1.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(B1);
+		
+		B2 = new JLabel("");
+		B2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		B2.setBackground(new Color(255, 0, 0));
+		B2.setForeground(new Color(0, 0, 0));
+		B2.setHorizontalAlignment(SwingConstants.CENTER);
+		B2.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(B2);
+		
 		B3 = new JLabel("");
 		B3.addMouseListener(new MouseAdapter() {
 			@Override
@@ -200,6 +164,42 @@ public class Window extends JFrame {
 		B3.setHorizontalAlignment(SwingConstants.CENTER);
 		B3.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(B3);
+		
+		B4 = new JLabel("");
+		B4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		B4.setBackground(new Color(255, 0, 0));
+		B4.setForeground(new Color(0, 0, 0));
+		B4.setHorizontalAlignment(SwingConstants.CENTER);
+		B4.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(B4);
+		
+		C1 = new JLabel("");
+		C1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		C1.setBackground(new Color(255, 0, 0));
+		C1.setForeground(new Color(0, 0, 0));
+		C1.setHorizontalAlignment(SwingConstants.CENTER);
+		C1.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(C1);
+		
+		C2 = new JLabel("");
+		C2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+		});
+		C2.setBackground(new Color(255, 0, 0));
+		C2.setForeground(new Color(0, 0, 0));
+		C2.setHorizontalAlignment(SwingConstants.CENTER);
+		C2.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(C2);
 		
 		C3 = new JLabel("");
 		C3.addMouseListener(new MouseAdapter() {
@@ -213,17 +213,17 @@ public class Window extends JFrame {
 		C3.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(C3);
 		
-		D3 = new JLabel("");
-		D3.addMouseListener(new MouseAdapter() {
+		C4 = new JLabel("");
+		C4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 			}
 		});
-		D3.setBackground(new Color(255, 0, 0));
-		D3.setForeground(new Color(0, 0, 0));
-		D3.setHorizontalAlignment(SwingConstants.CENTER);
-		D3.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(D3);
+		C4.setBackground(new Color(255, 0, 0));
+		C4.setForeground(new Color(0, 0, 0));
+		C4.setHorizontalAlignment(SwingConstants.CENTER);
+		C4.setBorder(BorderFactory.createLineBorder(Color.black));
+		panel.add(C4);
 		contentPane.add(sfondoLabel);
 		
 		setContentPane(contentPane);
@@ -231,21 +231,17 @@ public class Window extends JFrame {
 	
 	public void registraEvento(Controller c) {
 		A1.addMouseListener(c);
-		B1.addMouseListener(c);
-		C1.addMouseListener(c);
-		D1.addMouseListener(c);
 		A2.addMouseListener(c);
-		B2.addMouseListener(c);
-		C2.addMouseListener(c);
-		D2.addMouseListener(c);
 		A3.addMouseListener(c);
+		A4.addMouseListener(c);
+		B1.addMouseListener(c);
+		B2.addMouseListener(c);
 		B3.addMouseListener(c);
+		B4.addMouseListener(c);
+		C1.addMouseListener(c);
+		C2.addMouseListener(c);
 		C3.addMouseListener(c);
-		D3.addMouseListener(c);
-	}
-
-	public JLabel getA2() {
-		return A2;
+		C4.addMouseListener(c);
 	}
 
 	public JLabel getA1() {
@@ -256,50 +252,52 @@ public class Window extends JFrame {
 		return B1;
 	}
 
-	public JLabel getD1() {
-		return D1;
-	}
-
 	public JLabel getC1() {
 		return C1;
+	}
+
+	public JLabel getA2() {
+		return A2;
 	}
 
 	public JLabel getB2() {
 		return B2;
 	}
 
-	public JLabel getB3() {
-		return B3;
-	}
-
 	public JLabel getC2() {
 		return C2;
-	}
-
-	public JLabel getD2() {
-		return D2;
 	}
 
 	public JLabel getA3() {
 		return A3;
 	}
 
+	public JLabel getB3() {
+		return B3;
+	}
+
 	public JLabel getC3() {
 		return C3;
 	}
 
-	public JLabel getD3() {
-		return D3;
+	public JLabel getA4() {
+		return A4;
+	}
+
+	public JLabel getB4() {
+		return B4;
+	}
+
+	public JLabel getC4() {
+		return C4;
 	}
 
 	public void muoviPortiere(String pos) {
-		// TODO Auto-generated method stub
 		portiereFermoLabel.setVisible(false);
-		if(pos.equals("a1")) {
+		if(pos.equals("A1")) {
 			try {
 				portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//portiereTuffo=rotate(portiereTuffo, 180);

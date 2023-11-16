@@ -26,11 +26,6 @@ public class Shot {
 	}
 	
 	public boolean getShotResult() {
-		//TODO: Shouldnt be needed
-		//char[] temp = shot.toCharArray();
-		//char shotRow = temp[0];
-		//int shotColumn = Integer.parseInt(String.valueOf(temp[1]));
-		
 		char[] temp = save.toCharArray();
 		char saveRow = temp[0];
 		int saveColumn = Integer.parseInt(String.valueOf(temp[1]));

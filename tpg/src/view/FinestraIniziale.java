@@ -84,4 +84,8 @@ public class FinestraIniziale extends JFrame {
 	public JButton getButton() {
 		return btnConnect;
 	}
+	
+	public void cambia(String text) {
+		titolo.setText(text);
+	}
 }

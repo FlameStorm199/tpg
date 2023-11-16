@@ -21,7 +21,5 @@ public class MainClient {
 				}
 			}
 		});
-		//Client client = new Client();
-		//client.chat();
 	}
 }
