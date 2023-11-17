@@ -285,7 +285,7 @@ public class Window extends JFrame {
 		return C4;
 	}
 
-	public void muoviPortiere(String pos) {
+	public void modificaGrafica(String pos) {
 		portiereFermoLabel.setVisible(false);
 		if(pos.equals("A1")) {
 			try {

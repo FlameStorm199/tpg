@@ -29,20 +29,25 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 	}*/
 	
 	public void acceptedRequest() {
-		Client c = this.client;
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Window frame = new Window();
-					Controller controller = new Controller(frame, c);
-					client.setController(controller);
-					frame.setVisible(true);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+		fi.dispose();
+        Client c = this.client;
+        Controller controller = new Controller(null, c);
+        client.setController(controller);
+        Window frame = new Window();
+        controller.setWindow(frame);
+        frame.setVisible(true);
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    Window frame = new Window();
+//                    controller.setWindow(frame);
+//                    frame.setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+    }
 	
 	public void waitRequest() {
 		System.out.println("The connection to the server was succesful, wait for another player to connect...");

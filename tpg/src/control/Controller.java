@@ -20,7 +20,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public Controller(Window v, Client client) {
 		this.v = v;
 		this.client = client;
-		v.registraEvento(this);
 		ready = false;
 		role = "Not assigned";
 	}
@@ -54,73 +53,73 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "A1");
 			//RMB: Metodo da richiamare solo se è portiere! Ricorda a celotto di aggiungere la palla per gli attaccanti!
-			v.muoviPortiere("A1");
+			v.modificaGrafica("A1");
 		}
 		
 		if (e.getSource() == v.getA2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "A2");
-			v.muoviPortiere("A2");
+			v.modificaGrafica("A2");
 		}
 		
 		if (e.getSource() == v.getA3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "A3");
-			v.muoviPortiere("A3");
+			v.modificaGrafica("A3");
 		}
 		
 		if (e.getSource() == v.getA4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "A4");
-			v.muoviPortiere("A4");
+			v.modificaGrafica("A4");
 		}
 		
 		if (e.getSource() == v.getB1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "B1");
-			v.muoviPortiere("B1");
+			v.modificaGrafica("B1");
 		}
 		
 		if (e.getSource() == v.getB2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "B2");
-			v.muoviPortiere("B2");
+			v.modificaGrafica("B2");
 		}
 		
 		if (e.getSource() == v.getB3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "B3");
-			v.muoviPortiere("B3");
+			v.modificaGrafica("B3");
 		}
 		
 		if (e.getSource() == v.getB4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "B4");
-			v.muoviPortiere("B4");
+			v.modificaGrafica("B4");
 		}
 		
 		if (e.getSource() == v.getC1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "C1");
-			v.muoviPortiere("C1");
+			v.modificaGrafica("C1");
 		}
 		
 		if (e.getSource() == v.getC2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "C2");
-			v.muoviPortiere("C2");
+			v.modificaGrafica("C2");
 		}
 		
 		if (e.getSource() == v.getC3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "C3");
-			v.muoviPortiere("C3");
+			v.modificaGrafica("C3");
 		}
 		
 		if (e.getSource() == v.getC4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
 			client.sendShot(role, "C4");
-			v.muoviPortiere("C4");
+			v.modificaGrafica("C4");
 		}
 	}
 	
@@ -147,4 +146,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) { }
+	
+	public void setWindow(Window frame) {
+        // TODO Auto-generated method stub
+        this.v = frame;
+        v.registraEvento(this);
+    }
 }
