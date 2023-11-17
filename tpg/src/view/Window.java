@@ -53,6 +53,8 @@ public class Window extends JFrame {
 	private ImageIcon portiereFermo;
 	private BufferedImage portiereTuffo;
 	private JLabel labelPortiereTuffo;
+	private BufferedImage palla;
+	private JLabel labelPalla;
 	
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,18 +63,22 @@ public class Window extends JFrame {
 		contentPane.setLayout(null);
 		
 		sfondoLabel = new JLabel("");
-		sfondoLabel.setBounds(350, 10, 850, 781);
-		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondo.png").getImage().getScaledInstance(880, 830, Image.SCALE_DEFAULT));
+		sfondoLabel.setBounds(345, 0, 850, 781);
+		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondo.png").getImage().getScaledInstance(850, 800, Image.SCALE_DEFAULT));
 		sfondoLabel.setIcon(sfondo);
 		
 		portiereFermo=new ImageIcon(new ImageIcon("src/immagini/portiereFermo.png").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
 		
 		labelPortiereTuffo=new JLabel("");
 		//setComponentZOrder(labelPortiereTuffo, 1);
+		labelPalla=new JLabel("");
+		labelPalla.setLocation(35, 90);
+		labelPalla.setSize(65, 60);
+		contentPane.add(labelPalla);
 		contentPane.add(labelPortiereTuffo);
 		
 		portiereFermoLabel=new JLabel("");
-		portiereFermoLabel.setBounds(646, 53, 850, 781);
+		portiereFermoLabel.setBounds(619, 260, 300, 300);
 		portiereFermoLabel.setIcon(portiereFermo);
 		contentPane.add(portiereFermoLabel);
 		
@@ -304,16 +310,23 @@ public class Window extends JFrame {
 		//if(esito.equals("Goal!")) {
 			//modificaPortiere("A1");
 			try {
-				portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
+				portiereTuffo = ImageIO.read(new File("resources/portiereTuffo.png"));
 			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				palla = ImageIO.read(new File("resources/palla.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//portiereTuffo=rotate(portiereTuffo, 180);
 			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
 			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
-			labelPortiereTuffo.setBounds(300, 53, 850, 781);
-			setComponentZOrder(labelPortiereTuffo, 1);
-			setComponentZOrder(sfondoLabel, 0);
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPortiereTuffo.setBounds(455, 200, 300, 300);
+			labelPalla.setBounds(455, 251, 60, 60);
+			setComponentZOrder(labelPortiereTuffo, 0);
 		//}
 	}
 	

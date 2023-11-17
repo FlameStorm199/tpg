@@ -37,19 +37,20 @@ public class FinestraIniziale extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		contentPane.setLayout(null);
-		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1920, 1080, Image.SCALE_DEFAULT));
+		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT));
 		
 		lblConnect = new JLabel("Connect");
 		lblConnect.setForeground(new Color(255, 255, 255));
 		lblConnect.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConnect.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
-		lblConnect.setBounds(684, 395, 172, 41);
+		lblConnect.setBounds(684, 422, 172, 41);
 		
 		contentPane.add(lblConnect);
 		
 		textField = new JTextField("25.15.122.173");
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
-		textField.setBounds(638, 301, 264, 46);
+		textField.setBounds(638, 332, 264, 46);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -63,7 +64,7 @@ public class FinestraIniziale extends JFrame {
 		setContentPane(contentPane);
 		
 		sfondoLabel = new JLabel("");
-		sfondoLabel.setBounds(0, 0, 1920, 1080);
+		sfondoLabel.setBounds(0, 0, 1600, 900);
 		sfondoLabel.setIcon(sfondo);
 		contentPane.add(sfondoLabel);
 	}
