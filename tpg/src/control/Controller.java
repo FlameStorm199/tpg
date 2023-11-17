@@ -60,92 +60,92 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		//dell'esito), è un messaggio di attendere il tiro o la parata
 	}
 	
-	public void gestisciInput(String role, String position) {
-		client.scrivi(role, position);
-		stop = true;
-		if(role.equals("Portiere"))
-			role = "Attaccante";
-		else
-			role = "Portiere";
-		String mess = client.leggi();
-		if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
-			waitForTurn(mess);
-			mess = client.leggi();
-		}
-			
-		displayShotResult(mess);
-		//v.modificaGrafica(position);
-		stop = false;
-		mostraRuolo(role);
-	}
+	public void gestisciInput(String position) {
+        client.scrivi(this.role, position);
+        stop = true;
+        String mess = client.leggi();
+        if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
+            waitForTurn(mess);
+            mess = client.leggi();
+        }
+
+        displayShotResult(mess);
+        if(this.role.equals("Portiere"))
+            this.role = "Attaccante";
+        else
+            this.role = "Portiere";
+        //v.modificaGrafica(position);
+        stop = false;
+    }
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(stop) {
-			//TODO: Avvisa (con un metodo che cambia una label) che non è il suo turno
-			return;
-		}
-	
-		if (e.getSource() == v.getA1()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A1");
-		}
-		
-		if (e.getSource() == v.getA2()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A2");
-		}
-		
-		if (e.getSource() == v.getA3()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A3");
-		}
-		
-		if (e.getSource() == v.getA4()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A4");
-		}
-		
-		if (e.getSource() == v.getB1()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B1");
-		}
-		
-		if (e.getSource() == v.getB2()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B2");
-		}
-		
-		if (e.getSource() == v.getB3()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B3");
-		}
-		
-		if (e.getSource() == v.getB4()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B4");
-		}
-		
-		if (e.getSource() == v.getC1()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C1");
-		}
-		
-		if (e.getSource() == v.getC2()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C2");
-		}
-		
-		if (e.getSource() == v.getC3()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C3");
-		}
-		
-		if (e.getSource() == v.getC4()) {
-			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C4");
-		}
-	}
+    public void mouseClicked(MouseEvent e) {
+        if(stop) {
+            //TODO: Avvisa (con un metodo che cambia una label) che non è il suo turno
+            return;
+        }
+
+        if (e.getSource() == v.getA1()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("A1");
+        }
+
+        if (e.getSource() == v.getA2()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("A2");
+        }
+
+        if (e.getSource() == v.getA3()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("A3");
+        }
+
+        if (e.getSource() == v.getA4()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("A4");
+        }
+
+        if (e.getSource() == v.getB1()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("B1");
+        }
+
+        if (e.getSource() == v.getB2()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("B2");
+        }
+
+        if (e.getSource() == v.getB3()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("B3");
+        }
+        
+        if (e.getSource() == v.getB4()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("B4");
+        }
+
+        if (e.getSource() == v.getC1()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("C1");
+        }
+
+        if (e.getSource() == v.getC2()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("C2");
+        }
+
+        if (e.getSource() == v.getC3()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("C3");
+        }
+
+        if (e.getSource() == v.getC4()) {
+            //TODO: Implementare pulsante per chiudere la connessione
+            gestisciInput("C4");
+        }
+    }
+
 	
 	@Override
 	public void keyTyped(KeyEvent e) { }
