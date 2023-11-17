@@ -52,6 +52,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		System.out.println("Posizione portiere: "+posizionePortiere);
 		String esito = result.substring(4);
 		System.out.println("Esito: "+esito);
+		v.modificaGrafica(posizionePortiere, posizionePalla, esito, role);
 	}
 	
 	public void waitForTurn(String mess) {
@@ -73,7 +74,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		}
 			
 		displayShotResult(mess);
-		v.modificaGrafica(position);
+		//v.modificaGrafica(position);
 		stop = false;
 		mostraRuolo(role);
 	}

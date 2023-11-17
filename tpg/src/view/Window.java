@@ -286,7 +286,7 @@ public class Window extends JFrame {
 		return C4;
 	}
 
-	public void modificaGrafica(String pos) {
+	public void modificaGrafica(String pos, String posizionePalla, String esito, String role) {
 		portiereFermoLabel.setVisible(false);
 		if(pos.equals("A1")) {
 			try {
@@ -298,6 +298,10 @@ public class Window extends JFrame {
 			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
 			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
 			labelPortiereTuffo.setBounds(300, 53, 850, 781);
+		}
+		
+		if(esito.equals("Goal!")) {
+			
 		}
 	}
 	
