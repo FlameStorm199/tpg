@@ -63,6 +63,7 @@ public class Client{
 						break;
 					case BROADCAST:
 						System.out.println("[SERVER] "+op.getMessage());
+						res = op.getMessage();
 						break;
 					case ACK:
 						if(op.getMessage() != null)

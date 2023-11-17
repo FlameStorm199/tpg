@@ -22,6 +22,7 @@ public class Server extends Thread {
 			System.out.println("Server attivo");
 			game_started = false;
 			game = null;
+			broadcastMessage = null;
 			this.start();
 		} 
 		catch (IOException e) { 

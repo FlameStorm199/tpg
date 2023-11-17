@@ -74,10 +74,6 @@ public class Connessione extends Thread {
 			server.currentShot = new Shot();
 			while(!end_connection) {
 				System.out.println("Waiting for an operation...");
-				if(server.broadcastMessage != null && broadcastReceiver) {
-					output.writeObject(new Message(Protocollo.BROADCAST, server.broadcastMessage));
-					server.broadcastMessage = null;
-				}
 				
 				Message op = null;
 				String result = null;
@@ -94,6 +90,7 @@ public class Connessione extends Thread {
 							if(server.currentShot.getSave() != null) {
 								result = server.game.tryShot(server.currentShot);
 								server.broadcastMessage = server.currentShot.getShot()+server.currentShot.getSave()+result;
+								System.out.println(server.broadcastMessage);
 								server.currentShot = new Shot();
 								broadcastReceiver = false;
 							}else {
@@ -108,6 +105,7 @@ public class Connessione extends Thread {
 							if(server.currentShot.getShot()!=null) {
 								result = server.game.tryShot(server.currentShot);
 								server.broadcastMessage = server.currentShot.getShot()+server.currentShot.getSave()+result;
+								System.out.println(server.broadcastMessage);
 								server.currentShot = new Shot();
 								broadcastReceiver = false;
 							}else {
@@ -130,6 +128,17 @@ public class Connessione extends Thread {
 					}
 					
 					output.writeObject(op);
+					
+					if(broadcastReceiver) {
+						do{
+							//System.out.println();
+							Thread.sleep(1000);
+							if(server.broadcastMessage != null) {
+								output.writeObject(new Message(Protocollo.BROADCAST, server.broadcastMessage));
+							}
+						}while(server.broadcastMessage == null);
+						server.broadcastMessage = null;
+					}
 				}else {
 					throw new IOException();
 				}
