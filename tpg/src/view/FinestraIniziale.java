@@ -28,10 +28,7 @@ public class FinestraIniziale extends JFrame {
 	private JLabel titolo;
 	private JLabel sfondoLabel;
 	private ImageIcon sfondo;
-	
-	/**
-	 * Create the frame.
-	 */
+
 	public FinestraIniziale() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);

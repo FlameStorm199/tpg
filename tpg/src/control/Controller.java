@@ -14,23 +14,28 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	private Window v;
 	private Client client;
-	private boolean ready;
+	private boolean stop;
 	private String role;
 	
 	public Controller(Window v, Client client) {
 		this.v = v;
 		this.client = client;
-		ready = false;
+		stop = false;
 		role = "Not assigned";
 	}
 	
-	public void setRole(String role) {
+	public void setInitialRole(String role) {
 		this.role = role;
+		mostraRuolo(role);
+		
+	}
+	
+	public void mostraRuolo(String role) {
 		//TODO: Mostra sulla finestra il ruolo del giocatore
 	}
 	
 	public void readyForShot() {
-		ready = true;
+		stop = true;
 	}
 	
 	public void flawedConnection(String error) {
@@ -40,86 +45,104 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void displayShotResult(String result) {
 		//TODO: Mostra in una label questo messaggio, che mostra il risultato del tiro, un messaggio
 		//di aspettare la parata (o il tiro), e/o un messaggio con il risultato finale della partita
+		
+		String posizionePalla = String.valueOf(result.charAt(0)) + String.valueOf(result.charAt(1));
+		System.out.println("Posizione palla: "+posizionePalla);
+		String posizionePortiere = String.valueOf(result.charAt(2)) + String.valueOf(result.charAt(3));
+		System.out.println("Posizione portiere: "+posizionePortiere);
+		String esito = result.substring(4);
+		System.out.println("Esito: "+esito);
+	}
+	
+	public void waitForTurn(String mess) {
+		//TODO: Mostra questo messaggio (attenzione che poi dovrà essere sovrascritto, magari mettilo nella stessa label
+		//dell'esito), è un messaggio di attendere il tiro o la parata
+	}
+	
+	public void gestisciInput(String role, String position) {
+		client.scrivi(role, position);
+		stop = true;
+		if(role.equals("Portiere"))
+			role = "Attaccante";
+		else
+			role = "Portiere";
+		String mess = client.leggi();
+		if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
+			waitForTurn(mess);
+			mess = client.leggi();
+		}
+			
+		displayShotResult(mess);
+		v.modificaGrafica(position);
+		stop = false;
+		mostraRuolo(role);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(!ready) {
+		if(stop) {
 			//TODO: Avvisa (con un metodo che cambia una label) che non è il suo turno
 			return;
 		}
 	
 		if (e.getSource() == v.getA1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "A1");
-			//RMB: Metodo da richiamare solo se è portiere! Ricorda a celotto di aggiungere la palla per gli attaccanti!
-			v.modificaGrafica("A1");
+			gestisciInput(role, "A1");
 		}
 		
 		if (e.getSource() == v.getA2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "A2");
-			v.modificaGrafica("A2");
+			gestisciInput(role, "A2");
 		}
 		
 		if (e.getSource() == v.getA3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "A3");
-			v.modificaGrafica("A3");
+			gestisciInput(role, "A3");
 		}
 		
 		if (e.getSource() == v.getA4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "A4");
-			v.modificaGrafica("A4");
+			gestisciInput(role, "A4");
 		}
 		
 		if (e.getSource() == v.getB1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "B1");
-			v.modificaGrafica("B1");
+			gestisciInput(role, "B1");
 		}
 		
 		if (e.getSource() == v.getB2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "B2");
-			v.modificaGrafica("B2");
+			gestisciInput(role, "B2");
 		}
 		
 		if (e.getSource() == v.getB3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "B3");
-			v.modificaGrafica("B3");
+			gestisciInput(role, "B3");
 		}
 		
 		if (e.getSource() == v.getB4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "B4");
-			v.modificaGrafica("B4");
+			gestisciInput(role, "B4");
 		}
 		
 		if (e.getSource() == v.getC1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "C1");
-			v.modificaGrafica("C1");
+			gestisciInput(role, "C1");
 		}
 		
 		if (e.getSource() == v.getC2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "C2");
-			v.modificaGrafica("C2");
+			gestisciInput(role, "C2");
 		}
 		
 		if (e.getSource() == v.getC3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "C3");
-			v.modificaGrafica("C3");
+			gestisciInput(role, "C3");
 		}
 		
 		if (e.getSource() == v.getC4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			client.sendShot(role, "C4");
-			v.modificaGrafica("C4");
+			gestisciInput(role, "C4");
 		}
 	}
 	
@@ -146,10 +169,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) { }
-	
+
 	public void setWindow(Window frame) {
-        // TODO Auto-generated method stub
-        this.v = frame;
-        v.registraEvento(this);
-    }
+		// TODO Auto-generated method stub
+		this.v = frame;
+		v.registraEvento(this);
+		this.client.leggi();
+	}
 }

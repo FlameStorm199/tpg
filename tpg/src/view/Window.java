@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -324,4 +325,9 @@ public class Window extends JFrame {
         graphics.dispose();
         return bufferedImage;
     }
+
+	public void stampaMessaggio(String result) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(contentPane, result);
+	}
 }

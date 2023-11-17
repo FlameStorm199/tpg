@@ -11,22 +11,23 @@ public class Connessione extends Thread {
 	private Socket connection;
 	private ObjectInputStream input;	
 	private ObjectOutputStream output;	
-	private Game game;
 	private Semaphore lettura;
 	private Semaphore scrittura;
-	
-	public Connessione(Socket request, Game game) {
+	private String role;
+	private Server server;
+	private boolean broadcastReceiver;
+
+	public Connessione(Socket request, Game game, Server server) {
 		
 		try {
-			
+			this.server = server;
+			broadcastReceiver = false;
 			connection = request;
 			
 			System.out.println("Connection requested by: "+connection.getInetAddress().toString()+":"+connection.getPort());	//stampiamo il nuovo client collegato
 			
 			input = new ObjectInputStream(connection.getInputStream());
 			output = new ObjectOutputStream(connection.getOutputStream());
-			
-			this.game = game;
 			
 			lettura = new Semaphore(1);
 			scrittura = new Semaphore(0);
@@ -44,12 +45,14 @@ public class Connessione extends Thread {
 		output.writeObject(op);
 	}
 
-	public void startGame() throws IOException {
+	public void startGame(int role) throws IOException {
 		Message op = null;
 		op = new Message(Protocollo.ACCEPTED);
 		output.writeObject(op);
-		//TODO: Remember this
-		//this.start();
+		if(role == 0)
+			this.role = "Attaccante";
+		else
+			this.role = "Portiere";
 	}
 
 	public void connectionRejected() throws IOException {
@@ -62,109 +65,90 @@ public class Connessione extends Thread {
 		connection.close();
 	}
 
-	public void receiveInput() throws IOException, ClassNotFoundException {
-		System.out.println("Waiting for an operation...");
-		
-		Message op = null;
-		String position = null;
-		String result = null;
-		Shot shot = new Shot();
-		Object o = input.readObject();
-		boolean nack = false;
-
-		if(o instanceof Message) {
-		
-			op = (Message)o;
+	public void run() {
+		try {
+			output.writeObject(new Message(Protocollo.ASSIGNMENT, this.role));
 			
-			if(op.getOp().equals(Protocollo.END_CONNECTION)) {
-				//TODO: Find a way to warn the other player of this
-				System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
-				input.close();
-				output.close();
-				connection.close();
-			}
+			boolean end_connection = false;
 			
-			if(!op.getOp().equals(Protocollo.ACK) && !op.getOp().equals(Protocollo.NACK)) {
-				position = op.getMessage();
+			server.currentShot = new Shot();
+			while(!end_connection) {
+				System.out.println("Waiting for an operation...");
+				if(server.broadcastMessage != null && broadcastReceiver) {
+					output.writeObject(new Message(Protocollo.BROADCAST, server.broadcastMessage));
+					server.broadcastMessage = null;
+				}
 				
-				try {
-					if(op.getOp().equals(Protocollo.SHOOT)) {
-						shot.setShot(position);
-						result = "Shot received, waiting for save...";
-						
-						if(shot.getSave()!=null) {
-							result = game.tryShot(shot);
-							shot = new Shot();
-						}
-							
-						op = new Message(Protocollo.ACK, result);
-					}else if(op.getOp().equals(Protocollo.SAVE)) {
-						shot.setSave(position);
-						result = "Save received, waiting for shot...";
-						
-						if(shot.getShot()!=null) {
-							result = game.tryShot(shot);
-							shot = new Shot();
-						}
-						
-						//TODO: Implement method to stop game
-						op = new Message(Protocollo.ACK, result);
-					}else {
-						op = new Message(Protocollo.NACK, "Error: there was a problem with the message receiving");
-						nack = true;
+				Message op = null;
+				String result = null;
+				Object o = new Object();
+				
+				o = input.readObject();
+				if(o instanceof Message) {
+					op = (Message)o;
+					
+					switch(op.getOp()) {
+						case SHOOT:
+							server.currentShot.setShot(op.getMessage());
+							result = "Shot received, waiting for save...";
+							if(server.currentShot.getSave() != null) {
+								result = server.game.tryShot(server.currentShot);
+								server.broadcastMessage = server.currentShot.getShot()+server.currentShot.getSave()+result;
+								server.currentShot = new Shot();
+								broadcastReceiver = false;
+							}else {
+								broadcastReceiver = true;
+							}
+							System.out.println(result);
+							op = new Message(Protocollo.ACK, result);
+							break;
+						case SAVE:
+							server.currentShot.setSave(op.getMessage());
+							result = "Save received, waiting for shot...";
+							if(server.currentShot.getShot()!=null) {
+								result = server.game.tryShot(server.currentShot);
+								server.broadcastMessage = server.currentShot.getShot()+server.currentShot.getSave()+result;
+								server.currentShot = new Shot();
+								broadcastReceiver = false;
+							}else {
+								broadcastReceiver = true;
+							}
+							System.out.println(result);
+							op = new Message(Protocollo.ACK, result);
+							break;
+						case ACK:
+						case NACK:
+							op = new Message(Protocollo.NACK, "The client sent a wrong input: "+op.getMessage());
+							break;
+						case END_CONNECTION:
+							//TODO: The other client should be warned of this
+							System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
+							end_connection = true;
+							break;
+						default:
+							throw new IOException();
 					}
+					
+					output.writeObject(op);
+				}else {
+					throw new IOException();
 				}
-				catch(Exception e) {
-					op = new Message(Protocollo.NACK, "Error: "+e.getMessage());
-					nack = true;
-				}
-			}else {
-				op = new Message(Protocollo.NACK, "Error: there was a problem with the message receiving");
-				nack = true;
 			}
-		}
-		
-		output.writeObject(op);
-		if(nack) {
+			
 			input.close();
 			output.close();
 			connection.close();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
-		
-	public void run() {
-		/*
-		try {
-			Message op = null;
-			String position = null;
-			String result = null;
-			Shot shot = new Shot();
-			
-			while(true) {	
-				
-				scrittura.acquire();
-				
-
-					lettura.release();
-					scrittura.acquire();
-					//TODO: Implement choosing to play a new game or ending connection
-					
-					lettura.release();
-				}
-			}
-			
-			input.close();
-			output.close();
-			connection.close();
-			
-		}
-		catch(IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			System.out.println("Attendi il tuo turno!");
-			//e.printStackTrace();
-		} */
-		
+	
+	public String getRole() {
+		return this.role;
+	}
+	
+	public Socket getConnection() {
+		return this.connection;
 	}
 	
 	public ObjectInputStream getInput() {

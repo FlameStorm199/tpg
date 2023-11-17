@@ -13,41 +13,32 @@ import view.Window;
 public class ControllerFinestraIniziale implements ActionListener, MouseListener{
 	private FinestraIniziale fi;
 	private Client client;
+	private Window frame;
 	
 	public ControllerFinestraIniziale(FinestraIniziale fi) {
 		this.fi=fi;
 		fi.registraEvento(this);
+		this.frame = new Window();
+		frame.setVisible(false);
 	}
-	
-	/*
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == fi.getButton()) {
-			System.out.println("IP: "+fi.getIP());
-			this.client = new Client(fi.getIP(), this);
-		}
-	}*/
 	
 	public void acceptedRequest() {
 		fi.dispose();
-        Client c = this.client;
-        Controller controller = new Controller(null, c);
-        client.setController(controller);
-        Window frame = new Window();
-        controller.setWindow(frame);
-        frame.setVisible(true);
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    Window frame = new Window();
-//                    controller.setWindow(frame);
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-    }
+		Client c = this.client;
+		Controller controller = new Controller(null, c);
+		client.setController(controller);
+		controller.setWindow(frame);
+		frame.setVisible(true);
+		/*EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});*/
+	}
 	
 	public void waitRequest() {
 		System.out.println("The connection to the server was succesful, wait for another player to connect...");
@@ -59,41 +50,27 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == fi.getLblConnect()) {
 			System.out.println("IP: "+fi.getIP());
 			this.client = new Client(fi.getIP(), this);
-			client.configureClient();
+			String mess = "";
+			while(!mess.equals("Game started"))
+				mess = client.leggi();
 		}
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) { }
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) { }
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void actionPerformed(ActionEvent e) { }
 }
