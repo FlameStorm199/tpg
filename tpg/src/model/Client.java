@@ -18,69 +18,19 @@ public class Client {
 	private Controller controller;
 
 	public Client(String IP, ControllerFinestraIniziale cfi) {
-		
-		cfi = this.cfi;
-		
-		try { 	
-			connection = new Socket(IP, 20000);	
-			
-			output = new ObjectOutputStream(connection.getOutputStream());
-			input = new ObjectInputStream(connection.getInputStream());
-			
-			try {
-				while(true) {
-					Message op = null;
-					Object o = input.readObject();	
-					
-					if(o instanceof Message) {	
-						
-						op = (Message)o;	
-						
-						if(op.getOp().equals(Protocollo.WAITED)) {
-							System.out.println("[SERVER] Waited.");
-							if(op.getMessage()!=null)
-								System.out.println(op.getMessage());
-						}	
-						else if(op.getOp().equals(Protocollo.REJECTED)) {
-							System.out.println("[SERVER] Rejected.");
-							if(op.getMessage()!=null)
-								System.out.println(op.getMessage());
-							input.close();	
-							output.close();
-							connection.close();
-							break;
-						}
-						else if(op.getOp().equals(Protocollo.ACCEPTED)) {
-							System.out.println("[SERVER] Accepted");
-							if(op.getMessage()!=null)
-								System.out.println(op.getMessage());
-							cfi.acceptedRequest();
-							sendMessage();
-						}	
-						
-					}
-					else {
-						System.out.println("Fatal error: the class received was corrupted.");
-						input.close();	
-						output.close();
-						connection.close();
-						break;
-					}
-				}
-				
-			}
-			catch(IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		catch (IOException e) {
+
+        this.cfi = cfi;
+
+        try {
+            connection = new Socket(IP, 20000);
+
+            output = new ObjectOutputStream(connection.getOutputStream());
+            input = new ObjectInputStream(connection.getInputStream());
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
-		
-	}
+    }
 	
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -254,6 +204,56 @@ public class Client {
 		}while(x!=0);
 		
 	}
+	
+	public void configureClient() {
+        try {
+            while(true) {
+                Message op = null;
+                Object o = input.readObject();
+
+                if(o instanceof Message) {
+
+                    op = (Message)o;
+
+                    if(op.getOp().equals(Protocollo.WAITED)) {
+                        System.out.println("[SERVER] Waited.");
+                        if(op.getMessage()!=null)
+                            System.out.println(op.getMessage());
+                    }
+                    else if(op.getOp().equals(Protocollo.REJECTED)) {
+                        System.out.println("[SERVER] Rejected.");
+                        if(op.getMessage()!=null)
+                            System.out.println(op.getMessage());
+                        input.close();
+                        output.close();
+                        connection.close();
+                        break;
+                    }
+                    else if(op.getOp().equals(Protocollo.ACCEPTED)) {
+                        System.out.println("[SERVER] Accepted");
+                        if(op.getMessage()!=null)
+                            System.out.println(op.getMessage());
+                        cfi.acceptedRequest();
+                        sendMessage();
+                    }
+
+                }
+                else {
+                    System.out.println("Fatal error: the class received was corrupted.");
+                    input.close();
+                    output.close();
+                    connection.close();
+                    break;
+                }
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

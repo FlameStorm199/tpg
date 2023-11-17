@@ -1,5 +1,6 @@
 package control;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,10 +29,19 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 	}*/
 	
 	public void acceptedRequest() {
-		Window frame = new Window();
-		Controller controller = new Controller(frame, this.client);
-		client.setController(controller);
-		frame.setVisible(true);
+		Client c = this.client;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Window frame = new Window();
+					Controller controller = new Controller(frame, c);
+					client.setController(controller);
+					frame.setVisible(true);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public void waitRequest() {
@@ -48,6 +58,7 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 		if(e.getSource() == fi.getLblConnect()) {
 			System.out.println("IP: "+fi.getIP());
 			this.client = new Client(fi.getIP(), this);
+			client.configureClient();
 		}
 	}
 

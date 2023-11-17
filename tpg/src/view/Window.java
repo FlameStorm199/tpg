@@ -82,13 +82,6 @@ public class Window extends JFrame {
 		panel.setLayout(new GridLayout(3, 4, 0, 0));
 		
 		A1 = new JLabel("");
-//		A1.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				A1.setOpaque(true);
-//				A1.setBackground(Color.YELLOW);
-//			}
-//		});
 		A1.setHorizontalAlignment(SwingConstants.CENTER);
 		A1.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(A1);
