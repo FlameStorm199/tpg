@@ -39,19 +39,19 @@ public class FinestraIniziale extends JFrame {
 		contentPane.setLayout(null);
 		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1920, 1080, Image.SCALE_DEFAULT));
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
-		textField.setBounds(638, 301, 264, 46);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
 		lblConnect = new JLabel("Connect");
 		lblConnect.setForeground(new Color(255, 255, 255));
 		lblConnect.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConnect.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
 		lblConnect.setBounds(684, 395, 172, 41);
-	    
+		
 		contentPane.add(lblConnect);
+		
+		textField = new JTextField("25.15.122.173");
+		textField.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		textField.setBounds(638, 301, 264, 46);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
 		titolo = new JLabel("THE PENALTY GAME");
 		titolo.setForeground(new Color(255, 255, 255));

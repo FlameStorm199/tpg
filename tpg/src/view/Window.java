@@ -68,6 +68,7 @@ public class Window extends JFrame {
 		portiereFermo=new ImageIcon(new ImageIcon("src/immagini/portiereFermo.png").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
 		
 		labelPortiereTuffo=new JLabel("");
+		//setComponentZOrder(labelPortiereTuffo, 1);
 		contentPane.add(labelPortiereTuffo);
 		
 		portiereFermoLabel=new JLabel("");
@@ -219,7 +220,6 @@ public class Window extends JFrame {
 		C4.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(C4);
 		contentPane.add(sfondoLabel);
-		
 		setContentPane(contentPane);
 	}
 	
@@ -288,6 +288,7 @@ public class Window extends JFrame {
 
 	public void modificaGrafica(String pos, String posizionePalla, String esito, String role) {
 		portiereFermoLabel.setVisible(false);
+		/*
 		if(pos.equals("A1")) {
 			try {
 				portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
@@ -298,13 +299,29 @@ public class Window extends JFrame {
 			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
 			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
 			labelPortiereTuffo.setBounds(300, 53, 850, 781);
-		}
+		}*/
 		
-		if(esito.equals("Goal!")) {
-			
-		}
+		//if(esito.equals("Goal!")) {
+			//modificaPortiere("A1");
+			try {
+				portiereTuffo = ImageIO.read(new File("portiereTuffo.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//portiereTuffo=rotate(portiereTuffo, 180);
+			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
+			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
+			labelPortiereTuffo.setBounds(300, 53, 850, 781);
+			setComponentZOrder(labelPortiereTuffo, 1);
+			setComponentZOrder(sfondoLabel, 0);
+		//}
 	}
 	
+	private void modificaPortiere(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static BufferedImage rotate(BufferedImage buffered, int i) {
 	    double sin = Math.abs(Math.sin(Math.toRadians(i))),
 	           cos = Math.abs(Math.cos(Math.toRadians(i)));
