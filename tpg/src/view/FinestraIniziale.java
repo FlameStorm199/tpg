@@ -24,10 +24,10 @@ public class FinestraIniziale extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JButton btnConnect;
 	private JLabel titolo;
 	private JLabel sfondoLabel;
 	private ImageIcon sfondo;
+	private JLabel lblConnect;
 	
 	/**
 	 * Create the frame.
@@ -40,22 +40,22 @@ public class FinestraIniziale extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		contentPane.setLayout(null);
-		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1600, 800, Image.SCALE_DEFAULT));
+		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1680, 900, Image.SCALE_DEFAULT));
+		
+		lblConnect = new JLabel("CONNECT");
+		lblConnect.setForeground(Color.WHITE);
+		lblConnect.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConnect.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
+		lblConnect.setBounds(567, 369, 406, 74);
+		contentPane.add(lblConnect);
 		
 		textField = new JTextField();
+		textField.setForeground(Color.BLACK);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
 		textField.setBounds(638, 301, 264, 46);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
-		btnConnect = new JButton("Connect");
-		btnConnect.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
-		btnConnect.setBounds(684, 395, 172, 41);
-	    btnConnect.setContentAreaFilled(true);
-	    btnConnect.setBorderPainted(false);
-	    btnConnect.setFocusPainted(false);
-	    
-		contentPane.add(btnConnect);
 		
 		titolo = new JLabel("THE PENALTY GAME");
 		titolo.setForeground(new Color(255, 255, 255));
@@ -67,21 +67,24 @@ public class FinestraIniziale extends JFrame {
 		setContentPane(contentPane);
 		
 		sfondoLabel = new JLabel("");
-		sfondoLabel.setBounds(0, 10, 1600, 800);
+		sfondoLabel.setBounds(0, 0, 1680, 900);
 		sfondoLabel.setIcon(sfondo);
 		contentPane.add(sfondoLabel);
 	}
 	
 	public void registraEvento(ControllerFinestraIniziale fi) {
 		textField.addActionListener(fi);
-		btnConnect.addActionListener(fi);
+		lblConnect.addMouseListener(fi);
 	}
 	
 	public String getIP() {
 		return textField.getText();
 	}
-	
-	public JButton getButton() {
-		return btnConnect;
+
+	public JLabel getLblConnect() {
+		return lblConnect;
 	}
+	
+	
+	
 }
