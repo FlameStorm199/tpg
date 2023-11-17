@@ -119,7 +119,7 @@ public class Client {
 				controller.readyForShot();
 			}else if(op.getOp() == Protocollo.WAIT_TURN) {
 				//TODO: Implement this method?
-				controller.waitForTurn();
+				//controller.waitForTurn();
 			}else {
 				//TODO: ???
 				output.writeObject(new Message(Protocollo.NACK));

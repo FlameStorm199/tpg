@@ -122,12 +122,12 @@ public class Server extends Thread {
 		attaccante.getOutput().writeObject(new Message(Protocollo.SERVER_READY));
 		portiere.getOutput().writeObject(new Message(Protocollo.WAIT_TURN));
 		
-		attaccante.receiveInput();
+		//attaccante.receiveInput();
 		
 		portiere.getOutput().writeObject(new Message(Protocollo.SERVER_READY));
 		attaccante.getOutput().writeObject(new Message(Protocollo.WAIT_TURN));
 		
-		portiere.receiveInput();
+		//portiere.receiveInput();
 		//attaccante.start();
 		
 	}
