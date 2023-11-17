@@ -93,6 +93,7 @@ public class Connessione extends Thread {
 								System.out.println(server.broadcastMessage);
 								server.currentShot = new Shot();
 								broadcastReceiver = false;
+								result = server.broadcastMessage;
 							}else {
 								broadcastReceiver = true;
 							}
@@ -108,6 +109,7 @@ public class Connessione extends Thread {
 								System.out.println(server.broadcastMessage);
 								server.currentShot = new Shot();
 								broadcastReceiver = false;
+								result = server.broadcastMessage;
 							}else {
 								broadcastReceiver = true;
 							}

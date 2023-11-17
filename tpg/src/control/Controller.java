@@ -26,12 +26,12 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	public void setInitialRole(String role) {
 		this.role = role;
-		mostraRuolo(role);
-		
+		mostraRuolo();
 	}
 	
-	public void mostraRuolo(String role) {
+	public void mostraRuolo() {
 		//TODO: Mostra sulla finestra il ruolo del giocatore
+		System.out.println(this.role);
 	}
 	
 	public void readyForShot() {
@@ -60,13 +60,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		//dell'esito), è un messaggio di attendere il tiro o la parata
 	}
 	
-	public void gestisciInput(String role, String position) {
-		client.scrivi(role, position);
+	public void gestisciInput(String position) {
+		client.scrivi(this.role, position);
 		stop = true;
-		if(role.equals("Portiere"))
-			role = "Attaccante";
-		else
-			role = "Portiere";
 		String mess = client.leggi();
 		if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
 			waitForTurn(mess);
@@ -74,9 +70,12 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		}
 			
 		displayShotResult(mess);
+		if(this.role.equals("Portiere"))
+			this.role = "Attaccante";
+		else
+			this.role = "Portiere";
 		//v.modificaGrafica(position);
 		stop = false;
-		mostraRuolo(role);
 	}
 
 	@Override
@@ -88,62 +87,62 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 		if (e.getSource() == v.getA1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A1");
+			gestisciInput("A1");
 		}
 		
 		if (e.getSource() == v.getA2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A2");
+			gestisciInput("A2");
 		}
 		
 		if (e.getSource() == v.getA3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A3");
+			gestisciInput("A3");
 		}
 		
 		if (e.getSource() == v.getA4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "A4");
+			gestisciInput("A4");
 		}
 		
 		if (e.getSource() == v.getB1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B1");
+			gestisciInput("B1");
 		}
 		
 		if (e.getSource() == v.getB2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B2");
+			gestisciInput("B2");
 		}
 		
 		if (e.getSource() == v.getB3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B3");
+			gestisciInput("B3");
 		}
 		
 		if (e.getSource() == v.getB4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "B4");
+			gestisciInput("B4");
 		}
 		
 		if (e.getSource() == v.getC1()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C1");
+			gestisciInput("C1");
 		}
 		
 		if (e.getSource() == v.getC2()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C2");
+			gestisciInput("C2");
 		}
 		
 		if (e.getSource() == v.getC3()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C3");
+			gestisciInput("C3");
 		}
 		
 		if (e.getSource() == v.getC4()) {
 			//TODO: Implementare pulsante per chiudere la connessione
-			gestisciInput(role, "C4");
+			gestisciInput("C4");
 		}
 	}
 	
