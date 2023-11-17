@@ -30,16 +30,15 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 	public void acceptedRequest() {
 		Window frame = new Window();
 		Controller controller = new Controller(frame, this.client);
+		client.setController(controller);
 		frame.setVisible(true);
 	}
 	
 	public void waitRequest() {
-		//TODO: This should be in a label
 		System.out.println("The connection to the server was succesful, wait for another player to connect...");
 	}
 	
 	public void rejectedRequest() {
-		//TODO: This should be in a label
 		System.out.println("The server rejected your connection request. This usually happens because your request would exceed the maximum number of clients connected to that server.");
 	}
 

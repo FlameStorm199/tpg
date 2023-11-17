@@ -17,38 +17,78 @@ public class Game {
 	
 	public String tryShot(Shot shot) {
 		String res="";
-		if(counter > 10 || end_game == true) {
+		if(end_game) {
 			res = "The game ended at "+score1+" - "+score2+". Do you want to play a new game?";
 		}else {
-			if(counter % 2 == 0) {
-				counter++;
-				if(shot.getShotResult()) {
-					score1++;
-					if(score1 > (5-counter/2)+score2)
-						end_game = true;
-					res = "Goal! Current score: "+score1+" - "+score2;
+			if(counter < 10) {
+				if(counter % 2 == 0) {
+					counter++;
+					if(shot.getShotResult()) {
+						score1++;
+						if(score1 > (5-counter/2)+score2)
+							end_game = true;
+						res = "Goal! Current score: "+score1+" - "+score2;
+					}else {
+						if(score2 > (5-counter/2)+score1)
+							end_game = true;
+						res = "Saved! Current score: "+score1+" - "+score2;
+					}
 				}else {
-					if(score2 > (5-counter/2)+score1)
-						end_game = true;
-					res = "Saved! Current score: "+score1+" - "+score2;
+					counter++;
+					if(shot.getShotResult()) {
+						score2++;
+						if(score2 > (5-counter/2)+score1)
+							end_game = true;
+						res = "Goal! Current score: "+score1+" - "+score2;
+					}else {
+						if(score1 > (5-counter/2)+score2)
+							end_game = true;
+						res = "Saved! Current score: "+score1+" - "+score2;
+					}
 				}
 			}else {
-				counter++;
-				if(shot.getShotResult()) {
-					score2++;
-					if(score2 > (5-counter/2)+score1)
-						end_game = true;
-					res = "Goal! Current score: "+score1+" - "+score2;
-				}else {
-					if(score1 > (5-counter/2)+score2)
-						end_game = true;
-					res = "Saved! Current score: "+score1+" - "+score2;
-				}
+				res = tryShotTiebreak(shot);
 			}
-			if(counter > 10 || end_game == true) {
+			
+			if((counter == 10 && (score1 != score2)) || end_game) {
 				res += "\nThe game ended at "+score1+" - "+score2+". Do you want to play a new game?";
+				end_game = true;
 			}
 		}
 		return res;
 	}
+
+	private String tryShotTiebreak(Shot shot) {
+		String res = "";
+		if(counter % 2 == 0) {
+			counter++;
+			if(shot.getShotResult()) {
+				score1++;
+				res = "Goal! Current score: "+score1+" - "+score2;
+			}else {
+				res = "Saved! Current score: "+score1+" - "+score2;
+			}
+		}else {
+			counter++;
+			if(shot.getShotResult()) {
+				score2++;
+				res = "Goal! Current score: "+score1+" - "+score2;
+			}else {
+				res = "Saved! Current score: "+score1+" - "+score2;
+			}
+			
+			if(score1 != score2) {
+				res += "\nThe game ended at "+score1+" - "+score2+". Do you want to play a new game?";
+				end_game = true;
+			}	
+		}
+		
+		return res;
+	}
+
+	public boolean ended() {
+		return end_game;
+	}
+	
+	
 }
