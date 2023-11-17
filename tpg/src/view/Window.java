@@ -60,7 +60,7 @@ public class Window extends JFrame {
 		contentPane.setLayout(null);
 		
 		sfondoLabel = new JLabel("");
-		sfondoLabel.setBounds(350, 0, 850, 781);
+		sfondoLabel.setBounds(350, 10, 850, 781);
 		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondo.png").getImage().getScaledInstance(880, 830, Image.SCALE_DEFAULT));
 		sfondoLabel.setIcon(sfondo);
 		
