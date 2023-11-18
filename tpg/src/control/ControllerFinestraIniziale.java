@@ -41,11 +41,11 @@ public class ControllerFinestraIniziale implements ActionListener, MouseListener
 	}
 	
 	public void waitRequest() {
-		System.out.println("The connection to the server was succesful, wait for another player to connect...");
+		fi.setLblConnessione("The connection to the server was succesful, wait for another player to connect...");
 	}
 	
 	public void rejectedRequest() {
-		System.out.println("The server rejected your connection request. This usually happens because your request would exceed the maximum number of clients connected to that server.");
+		fi.setLblConnessione("The server rejected your connection request. This usually happens because your request would exceed the maximum number of clients connected to that server.");
 	}
 
 	@Override

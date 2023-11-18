@@ -28,6 +28,7 @@ public class FinestraIniziale extends JFrame {
 	private JLabel titolo;
 	private JLabel sfondoLabel;
 	private ImageIcon sfondo;
+	private JLabel lblConnessione;
 
 	public FinestraIniziale() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,8 +68,19 @@ public class FinestraIniziale extends JFrame {
 		sfondoLabel.setBounds(0, 0, 1600, 900);
 		sfondoLabel.setIcon(sfondo);
 		contentPane.add(sfondoLabel);
+		
+		lblConnessione = new JLabel("");
+		lblConnessione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConnessione.setForeground(Color.WHITE);
+		lblConnessione.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		lblConnessione.setBounds(208, 611, 1124, 41);
+		contentPane.add(lblConnessione);
 	}
 	
+	public void setLblConnessione(String conn) {
+		this.lblConnessione.setText(conn);
+	}
+
 	public void registraEvento(ControllerFinestraIniziale fi) {
 		textField.addActionListener(fi);
 		lblConnect.addMouseListener(fi);
