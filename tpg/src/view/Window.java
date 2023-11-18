@@ -15,8 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.FontUIResource;
 
 import control.Controller;
 import control.ControllerFinestraIniziale;
@@ -56,6 +58,8 @@ public class Window extends JFrame {
 	private JLabel labelPortiereTuffo;
 	private BufferedImage palla;
 	private JLabel labelPalla;
+	private JLabel lblRuolo;
+	private JButton btnChiudiConnessione;
 	
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +75,11 @@ public class Window extends JFrame {
 		portiereFermo=new ImageIcon(new ImageIcon("src/immagini/portiereFermo.png").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
 		
 		labelPortiereTuffo=new JLabel("");
+		
+		lblRuolo = new JLabel("");
+		lblRuolo.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
+		lblRuolo.setBounds(447, 58, 207, 46);
+		contentPane.add(lblRuolo);
 		//setComponentZOrder(labelPortiereTuffo, 1);
 		labelPalla=new JLabel("");
 		labelPalla.setLocation(35, 90);
@@ -228,21 +237,26 @@ public class Window extends JFrame {
 		panel.add(C4);
 		contentPane.add(sfondoLabel);
 		setContentPane(contentPane);
+		
+		btnChiudiConnessione = new JButton("CHIUDI CONNESSIONE");
+		btnChiudiConnessione.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
+		btnChiudiConnessione.setBounds(965, 58, 207, 32);
+		contentPane.add(btnChiudiConnessione);
 	}
 	
-	public void registraEvento(Controller controller) {
-		A1.addMouseListener(controller);
-		A2.addMouseListener(controller);
-		A3.addMouseListener(controller);
-		A4.addMouseListener(controller);
-		B1.addMouseListener(controller);
-		B2.addMouseListener(controller);
-		B3.addMouseListener(controller);
-		B4.addMouseListener(controller);
-		C1.addMouseListener(controller);
-		C2.addMouseListener(controller);
-		C3.addMouseListener(controller);
-		C4.addMouseListener(controller);
+	public void registraEvento(ControllerProva controllerProva) {
+		A1.addMouseListener(controllerProva);
+		A2.addMouseListener(controllerProva);
+		A3.addMouseListener(controllerProva);
+		A4.addMouseListener(controllerProva);
+		B1.addMouseListener(controllerProva);
+		B2.addMouseListener(controllerProva);
+		B3.addMouseListener(controllerProva);
+		B4.addMouseListener(controllerProva);
+		C1.addMouseListener(controllerProva);
+		C2.addMouseListener(controllerProva);
+		C3.addMouseListener(controllerProva);
+		C4.addMouseListener(controllerProva);
 	}
 
 	public JLabel getA1() {
@@ -321,8 +335,21 @@ public class Window extends JFrame {
 		
 		modificaPortiere(posizionePortiere);
 		modificaPalla(posizionePalla);
+		
+		mostraEsito(esito);
 	}
 	
+	private void mostraEsito(String esito) {
+		// TODO Auto-generated method stub
+		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
+		int r=JOptionPane.showConfirmDialog(contentPane, esito, "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		if(r==JOptionPane.OK_OPTION) {
+			portiereFermoLabel.setVisible(true);
+			labelPalla.setVisible(false);
+			labelPortiereTuffo.setVisible(false);
+		}
+	}
+
 	private void modificaPortiere(String pos) {
 		// TODO Auto-generated method stub
 		switch(pos){
@@ -474,4 +501,13 @@ public class Window extends JFrame {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(contentPane, result);
 	}
+
+	public void setLblRuolo(String role) {
+		this.lblRuolo.setText(role);
+	}
+
+	public JButton getBtnChiudiConnessione() {
+		return btnChiudiConnessione;
+	}
+	
 }

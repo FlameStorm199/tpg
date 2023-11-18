@@ -30,8 +30,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	public void mostraRuolo() {
-		//TODO: Mostra sulla finestra il ruolo del giocatore
 		System.out.println(this.role);
+		v.setLblRuolo(role);
 	}
 	
 	public void readyForShot() {
