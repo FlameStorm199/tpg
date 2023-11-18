@@ -230,7 +230,7 @@ public class Window extends JFrame {
 		setContentPane(contentPane);
 	}
 	
-	public void registraEvento(ControllerProva controller) {
+	public void registraEvento(Controller controller) {
 		A1.addMouseListener(controller);
 		A2.addMouseListener(controller);
 		A3.addMouseListener(controller);
@@ -321,29 +321,128 @@ public class Window extends JFrame {
 		
 		modificaPortiere(posizionePortiere);
 		modificaPalla(posizionePalla);
-		
-		if(esito.equals("Goal!")) {
-			setComponentZOrder(labelPalla, 0);
-			setComponentZOrder(labelPortiereTuffo, 0);
-		}else {
-			setComponentZOrder(labelPortiereTuffo, 0);
-			setComponentZOrder(labelPalla, 0);
-		}
-
-		modificaPortiere(posizionePortiere);
-		modificaPalla(posizionePalla);
 	}
 	
-	private void modificaPalla(String posizionePalla) {
+	private void modificaPortiere(String pos) {
 		// TODO Auto-generated method stub
-		labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
-		labelPortiereTuffo.setBounds(455, 256, 300, 300);
+		switch(pos){
+			case "A1":
+				portiereTuffo=rotate(portiereTuffo, -10);
+				labelPortiereTuffo.setBounds(440, 110, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(355, 355, Image.SCALE_DEFAULT)));
+				break;
+			case "A2":
+				portiereTuffo=rotate(portiereTuffo, 38);
+				labelPortiereTuffo.setBounds(480, 108, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(415, 415, Image.SCALE_DEFAULT)));
+				break;
+			case "A3":
+				portiereTuffo=rotate(portiereTuffo, 45);
+				labelPortiereTuffo.setBounds(650, 108, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(415, 415, Image.SCALE_DEFAULT)));
+				break;
+			case "A4":
+				portiereTuffo=rotate(portiereTuffo, 105);
+				labelPortiereTuffo.setBounds(745, 110, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(365, 365, Image.SCALE_DEFAULT)));
+				break;
+			case "B1":
+				portiereTuffo=rotate(portiereTuffo, -40);
+				labelPortiereTuffo.setBounds(410, 175, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(435, 435, Image.SCALE_DEFAULT)));
+				break;
+			case "B2":
+				portiereTuffo=rotate(portiereTuffo, 38);
+				labelPortiereTuffo.setBounds(480, 180, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(415, 415, Image.SCALE_DEFAULT)));
+				break;
+			case "B3":
+				portiereTuffo=rotate(portiereTuffo, 45);
+				labelPortiereTuffo.setBounds(650, 180, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(415, 415, Image.SCALE_DEFAULT)));
+				break;
+			case "B4":
+				portiereTuffo=rotate(portiereTuffo, 127);
+				labelPortiereTuffo.setBounds(710, 175, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(420, 420, Image.SCALE_DEFAULT)));
+				break;
+			case "C1":
+				portiereTuffo=rotate(portiereTuffo, -40);
+				labelPortiereTuffo.setBounds(410, 275, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(435, 435, Image.SCALE_DEFAULT)));
+				break;
+			case "C2":
+				portiereTuffo=rotate(portiereTuffo, -40);
+				labelPortiereTuffo.setBounds(560, 275, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(435, 435, Image.SCALE_DEFAULT)));
+				break;
+			case "C3":
+				portiereTuffo=rotate(portiereTuffo, 127);
+				labelPortiereTuffo.setBounds(560, 275, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(420, 420, Image.SCALE_DEFAULT)));
+				break;
+			case "C4":
+				portiereTuffo=rotate(portiereTuffo, 127);
+				labelPortiereTuffo.setBounds(710, 275, 500, 500);
+				labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(420, 420, Image.SCALE_DEFAULT)));
+				break;
+		}
 	}
 
-	private void modificaPortiere(String string) {
+	private void modificaPalla(String pos) {
 		// TODO Auto-generated method stub
-		labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-		labelPalla.setBounds(480, 300, 60, 60);
+		switch(pos){
+		case "A1":			
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(480, 280, 60, 60);
+			break;
+		case "A2":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(640, 280, 60, 60);
+			break;
+		case "A3":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(850, 280, 60, 60);
+			break;
+		case "A4":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(980, 280, 60, 60);
+			break;
+		case "B1":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(480, 340, 60, 60);
+			break;
+		case "B2":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(640, 380, 60, 60);
+			break;
+		case "B3":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(850, 380, 60, 60);
+			break;
+		case "B4":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(980, 340, 60, 60);
+			break;
+		case "C1":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(480, 490, 60, 60);
+			break;
+		case "C2":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(640, 490, 60, 60);
+			break;
+		case "C3":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(850, 490, 60, 60);
+			break;
+		case "C4":
+			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+			labelPalla.setBounds(980, 490, 60, 60);
+			break;
+	}
+//		labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+//		labelPalla.setBounds(480, 300, 60, 60);
 	}
 
 	public static BufferedImage rotate(BufferedImage buffered, int i) {
