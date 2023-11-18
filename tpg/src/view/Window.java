@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.Controller;
 import control.ControllerFinestraIniziale;
+import control.ControllerProva;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
@@ -73,19 +74,19 @@ public class Window extends JFrame {
 		//setComponentZOrder(labelPortiereTuffo, 1);
 		labelPalla=new JLabel("");
 		labelPalla.setLocation(35, 90);
-		labelPalla.setSize(65, 60);
+		labelPalla.setSize(60, 60);
 		contentPane.add(labelPalla);
 		contentPane.add(labelPortiereTuffo);
 		
 		portiereFermoLabel=new JLabel("");
-		portiereFermoLabel.setBounds(619, 260, 300, 300);
+		portiereFermoLabel.setBounds(619, 278, 300, 300);
 		portiereFermoLabel.setIcon(portiereFermo);
 		contentPane.add(portiereFermoLabel);
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(104, 104, 104, 60));
 		panel.setOpaque(true);
-		panel.setBounds(455, 251, 670, 315);
+		panel.setBounds(447, 245, 646, 307);
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(3, 4, 0, 0));
 		
@@ -229,19 +230,19 @@ public class Window extends JFrame {
 		setContentPane(contentPane);
 	}
 	
-	public void registraEvento(Controller c) {
-		A1.addMouseListener(c);
-		A2.addMouseListener(c);
-		A3.addMouseListener(c);
-		A4.addMouseListener(c);
-		B1.addMouseListener(c);
-		B2.addMouseListener(c);
-		B3.addMouseListener(c);
-		B4.addMouseListener(c);
-		C1.addMouseListener(c);
-		C2.addMouseListener(c);
-		C3.addMouseListener(c);
-		C4.addMouseListener(c);
+	public void registraEvento(ControllerProva controller) {
+		A1.addMouseListener(controller);
+		A2.addMouseListener(controller);
+		A3.addMouseListener(controller);
+		A4.addMouseListener(controller);
+		B1.addMouseListener(controller);
+		B2.addMouseListener(controller);
+		B3.addMouseListener(controller);
+		B4.addMouseListener(controller);
+		C1.addMouseListener(controller);
+		C2.addMouseListener(controller);
+		C3.addMouseListener(controller);
+		C4.addMouseListener(controller);
 	}
 
 	public JLabel getA1() {
@@ -292,7 +293,7 @@ public class Window extends JFrame {
 		return C4;
 	}
 
-	public void modificaGrafica(String pos, String posizionePalla, String esito, String role) {
+	public void modificaGrafica(String posizionePortiere, String posizionePalla, String esito) {
 		portiereFermoLabel.setVisible(false);
 		/*
 		if(pos.equals("A1")) {
@@ -306,33 +307,43 @@ public class Window extends JFrame {
 			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
 			labelPortiereTuffo.setBounds(300, 53, 850, 781);
 		}*/
+		try {
+			portiereTuffo = ImageIO.read(new File("resources/portiereTuffo.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			palla = ImageIO.read(new File("resources/palla.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//if(esito.equals("Goal!")) {
-			//modificaPortiere("A1");
-			try {
-				portiereTuffo = ImageIO.read(new File("resources/portiereTuffo.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			try {
-				palla = ImageIO.read(new File("resources/palla.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//portiereTuffo=rotate(portiereTuffo, 180);
-			labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
-			//labelPortiereTuffo.setIcon(new ImageIcon(portiereTuffo));
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPortiereTuffo.setBounds(455, 200, 300, 300);
-			labelPalla.setBounds(455, 251, 60, 60);
+		modificaPortiere(posizionePortiere);
+		modificaPalla(posizionePalla);
+		
+		if(esito.equals("Goal!")) {
+			setComponentZOrder(labelPalla, 0);
 			setComponentZOrder(labelPortiereTuffo, 0);
-		//}
+		}else {
+			setComponentZOrder(labelPortiereTuffo, 0);
+			setComponentZOrder(labelPalla, 0);
+		}
+
+		modificaPortiere(posizionePortiere);
+		modificaPalla(posizionePalla);
 	}
 	
+	private void modificaPalla(String posizionePalla) {
+		// TODO Auto-generated method stub
+		labelPortiereTuffo.setIcon(new ImageIcon(new ImageIcon(portiereTuffo).getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT)));
+		labelPortiereTuffo.setBounds(455, 256, 300, 300);
+	}
+
 	private void modificaPortiere(String string) {
 		// TODO Auto-generated method stub
-		
+		labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+		labelPalla.setBounds(480, 300, 60, 60);
 	}
 
 	public static BufferedImage rotate(BufferedImage buffered, int i) {
