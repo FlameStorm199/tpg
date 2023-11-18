@@ -40,6 +40,13 @@ public class FinestraIniziale extends JFrame {
 		contentPane.setLayout(null);
 		sfondo = new ImageIcon(new ImageIcon("src/immagini/sfondoHome.jpg").getImage().getScaledInstance(1600, 900, Image.SCALE_DEFAULT));
 		
+		lblConnessione = new JLabel("ciao");
+		lblConnessione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConnessione.setForeground(Color.WHITE);
+		lblConnessione.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		lblConnessione.setBounds(208, 611, 1124, 41);
+		contentPane.add(lblConnessione);
+		
 		lblConnect = new JLabel("Connect");
 		lblConnect.setForeground(new Color(255, 255, 255));
 		lblConnect.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,17 +75,12 @@ public class FinestraIniziale extends JFrame {
 		sfondoLabel.setBounds(0, 0, 1600, 900);
 		sfondoLabel.setIcon(sfondo);
 		contentPane.add(sfondoLabel);
-		
-		lblConnessione = new JLabel("");
-		lblConnessione.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConnessione.setForeground(Color.WHITE);
-		lblConnessione.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
-		lblConnessione.setBounds(208, 611, 1124, 41);
-		contentPane.add(lblConnessione);
 	}
 	
 	public void setLblConnessione(String conn) {
-		this.lblConnessione.setText(conn);
+		System.out.println("AAA");
+		lblConnessione.setText(conn);
+		lblConnessione.setVisible(true);
 	}
 
 	public void registraEvento(ControllerFinestraIniziale fi) {

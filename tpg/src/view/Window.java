@@ -61,6 +61,7 @@ public class Window extends JFrame {
 	private JLabel labelPalla;
 	private JLabel lblRuolo;
 	private JButton btnChiudiConnessione;
+	private JLabel lblInputRicevuto;
 	
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,6 +87,17 @@ public class Window extends JFrame {
 		lblRuolo.setBorder(BorderFactory.createLineBorder(Color.black));
 		lblRuolo.setBounds(357, 58, 207, 46);
 		contentPane.add(lblRuolo);
+		
+		lblInputRicevuto = new JLabel("Input ricevuto");
+		lblInputRicevuto.setOpaque(true);
+		lblInputRicevuto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInputRicevuto.setForeground(Color.BLACK);
+		lblInputRicevuto.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
+		lblInputRicevuto.setBorder(BorderFactory.createLineBorder(Color.black));
+		lblInputRicevuto.setBackground(Color.WHITE);
+		lblInputRicevuto.setBounds(507, 713, 525, 46);
+		lblInputRicevuto.setVisible(false);
+		contentPane.add(lblInputRicevuto);
 		labelPalla=new JLabel("");
 		labelPalla.setLocation(35, 90);
 		labelPalla.setSize(60, 60);
@@ -349,7 +361,7 @@ public class Window extends JFrame {
 	private void mostraEsito(String esito) {
 		// TODO Auto-generated method stub
 		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
-		int r=JOptionPane.showConfirmDialog(contentPane, esito, "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		int r=JOptionPane.showConfirmDialog(contentPane, esito, "", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if(r==JOptionPane.OK_OPTION) {
 			portiereFermoLabel.setVisible(true);
 			labelPalla.setVisible(false);
@@ -513,6 +525,17 @@ public class Window extends JFrame {
 
 	public JButton getBtnChiudiConnessione() {
 		return btnChiudiConnessione;
+	}
+
+	public void stampaAttesa() {
+		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
+		int r=JOptionPane.showConfirmDialog(contentPane, "Attendi il tuo turno!", "", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+	}
+
+	public void setLblInputRicevuto(String mess) {
+		// TODO Auto-generated method stub
+		lblInputRicevuto.setVisible(true);
+		lblInputRicevuto.setText(mess);
 	}
 	
 }

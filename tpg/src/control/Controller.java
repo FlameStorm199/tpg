@@ -47,8 +47,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	public void waitForTurn(String mess) {
-		//TODO: Mostra questo messaggio (attenzione che poi dovrà essere sovrascritto, magari mettilo nella stessa label
-		//dell'esito), è un messaggio di attendere il tiro o la parata
+		v.setLblInputRicevuto(mess);
 	}
 	
 	public void gestisciInput(String position) {
@@ -72,6 +71,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	@Override
     public void mouseClicked(MouseEvent e) {
         if(stop) {
+        	v.stampaAttesa();
             return;
         }
 
