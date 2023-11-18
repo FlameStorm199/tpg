@@ -30,16 +30,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	public void mostraRuolo() {
-		System.out.println(this.role);
 		v.setLblRuolo(role);
-	}
-	
-	public void readyForShot() {
-		stop = true;
-	}
-	
-	public void flawedConnection(String error) {
-		//TODO: Mostra in una label il messaggio di errore, avvisa che la connessione verrà chiusa
 	}
 	
 	public void displayShotResult(String result) {
@@ -74,74 +65,61 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			this.role = "Attaccante";
 		else
 			this.role = "Portiere";
-		//v.modificaGrafica(position);
+		mostraRuolo();
 		stop = false;
 	}
 
 	@Override
     public void mouseClicked(MouseEvent e) {
         if(stop) {
-            //TODO: Avvisa (con un metodo che cambia una label) che non è il suo turno
             return;
         }
 
         if (e.getSource() == v.getA1()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("A1");
         }
 
         if (e.getSource() == v.getA2()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("A2");
         }
 
         if (e.getSource() == v.getA3()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("A3");
         }
 
         if (e.getSource() == v.getA4()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("A4");
         }
 
         if (e.getSource() == v.getB1()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("B1");
         }
 
         if (e.getSource() == v.getB2()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("B2");
         }
 
         if (e.getSource() == v.getB3()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("B3");
         }
         
         if (e.getSource() == v.getB4()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("B4");
         }
 
         if (e.getSource() == v.getC1()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("C1");
         }
 
         if (e.getSource() == v.getC2()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("C2");
         }
 
         if (e.getSource() == v.getC3()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("C3");
         }
 
         if (e.getSource() == v.getC4()) {
-            //TODO: Implementare pulsante per chiudere la connessione
             gestisciInput("C4");
         }
     }

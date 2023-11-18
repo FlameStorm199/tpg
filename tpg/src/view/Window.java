@@ -43,6 +43,7 @@ import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import javax.swing.ButtonGroup;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.SystemColor;
 
 public class Window extends JFrame {
 
@@ -76,11 +77,15 @@ public class Window extends JFrame {
 		
 		labelPortiereTuffo=new JLabel("");
 		
-		lblRuolo = new JLabel("");
+		lblRuolo = new JLabel("RUOLO");
+		lblRuolo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRuolo.setBackground(Color.WHITE);
+		lblRuolo.setForeground(SystemColor.BLACK);
 		lblRuolo.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
-		lblRuolo.setBounds(447, 58, 207, 46);
+		lblRuolo.setOpaque(true);
+		lblRuolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		lblRuolo.setBounds(357, 58, 207, 46);
 		contentPane.add(lblRuolo);
-		//setComponentZOrder(labelPortiereTuffo, 1);
 		labelPalla=new JLabel("");
 		labelPalla.setLocation(35, 90);
 		labelPalla.setSize(60, 60);
@@ -88,7 +93,7 @@ public class Window extends JFrame {
 		contentPane.add(labelPortiereTuffo);
 		
 		portiereFermoLabel=new JLabel("");
-		portiereFermoLabel.setBounds(619, 278, 300, 300);
+		portiereFermoLabel.setBounds(620, 278, 300, 300);
 		portiereFermoLabel.setIcon(portiereFermo);
 		contentPane.add(portiereFermoLabel);
 		
@@ -244,7 +249,7 @@ public class Window extends JFrame {
 		contentPane.add(btnChiudiConnessione);
 	}
 	
-	public void registraEvento(ControllerProva controllerProva) {
+	public void registraEvento(Controller controllerProva) {
 		A1.addMouseListener(controllerProva);
 		A2.addMouseListener(controllerProva);
 		A3.addMouseListener(controllerProva);
@@ -309,6 +314,8 @@ public class Window extends JFrame {
 
 	public void modificaGrafica(String posizionePortiere, String posizionePalla, String esito) {
 		portiereFermoLabel.setVisible(false);
+		labelPalla.setVisible(true);
+		labelPortiereTuffo.setVisible(true);
 		/*
 		if(pos.equals("A1")) {
 			try {
@@ -419,57 +426,55 @@ public class Window extends JFrame {
 	private void modificaPalla(String pos) {
 		// TODO Auto-generated method stub
 		switch(pos){
-		case "A1":			
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(480, 280, 60, 60);
-			break;
-		case "A2":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(640, 260, 60, 60);
-			break;
-		case "A3":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(850, 260, 60, 60);
-			break;
-		case "A4":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(980, 280, 60, 60);
-			break;
-		case "B1":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(480, 340, 60, 60);
-			break;
-		case "B2":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(640, 380, 60, 60);
-			break;
-		case "B3":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(850, 380, 60, 60);
-			break;
-		case "B4":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(980, 340, 60, 60);
-			break;
-		case "C1":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(480, 490, 60, 60);
-			break;
-		case "C2":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(640, 490, 60, 60);
-			break;
-		case "C3":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(850, 490, 60, 60);
-			break;
-		case "C4":
-			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(980, 490, 60, 60);
-			break;
-	}
-//		labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-//		labelPalla.setBounds(480, 300, 60, 60);
+			case "A1":			
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(480, 280, 60, 60);
+				break;
+			case "A2":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(640, 260, 60, 60);
+				break;
+			case "A3":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(850, 260, 60, 60);
+				break;
+			case "A4":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(980, 280, 60, 60);
+				break;
+			case "B1":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(480, 340, 60, 60);
+				break;
+			case "B2":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(640, 380, 60, 60);
+				break;
+			case "B3":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(850, 380, 60, 60);
+				break;
+			case "B4":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(980, 340, 60, 60);
+				break;
+			case "C1":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(480, 490, 60, 60);
+				break;
+			case "C2":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(640, 490, 60, 60);
+				break;
+			case "C3":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(850, 490, 60, 60);
+				break;
+			case "C4":
+				labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+				labelPalla.setBounds(980, 490, 60, 60);
+				break;
+		}
 	}
 
 	public static BufferedImage rotate(BufferedImage buffered, int i) {
