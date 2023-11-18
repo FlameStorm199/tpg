@@ -398,11 +398,11 @@ public class Window extends JFrame {
 			break;
 		case "A2":
 			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(640, 280, 60, 60);
+			labelPalla.setBounds(640, 260, 60, 60);
 			break;
 		case "A3":
 			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-			labelPalla.setBounds(850, 280, 60, 60);
+			labelPalla.setBounds(850, 260, 60, 60);
 			break;
 		case "A4":
 			labelPalla.setIcon(new ImageIcon(new ImageIcon(palla).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
