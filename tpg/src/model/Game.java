@@ -20,7 +20,7 @@ public class Game {
 	public String tryShot(Shot shot) throws IOException{
 		String res="";
 		if(end_game) {
-			res = "La partita è terminata con un risultato di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
+			res = "La partita e' terminata con un risultato di "+score1+" - "+score2;
 		}else {
 			if(counter < 10) {
 				if(counter % 2 == 0) {
@@ -50,7 +50,7 @@ public class Game {
 				}
 				
 				if((counter == 10 && (score1 != score2)) || end_game) {
-					res += "\nLa partita è terminata con un risultato di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
+					res += "\nLa partita e' terminata con un risultato di "+score1+" - "+score2;
 					end_game = true;
 				}
 			}else {
@@ -98,7 +98,7 @@ public class Game {
 			}
 			
 			if(score1 != score2) {
-				res += "\nLa partita è terminata con un punteggio di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
+				res += "\nLa partita e' terminata con un punteggio di "+score1+" - "+score2;
 				end_game = true;
 			}	
 		}

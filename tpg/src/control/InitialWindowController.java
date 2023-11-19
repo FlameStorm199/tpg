@@ -31,11 +31,11 @@ public class InitialWindowController implements ActionListener, MouseListener{
 	
 	public void waitRequest() {
 		waiting = true;
-		fi.setLblConnection("La connessione al server è avvenuta con successo, in attesa di un altro giocatore...");
+		fi.setLblConnection("La connessione al server e' avvenuta con successo, in attesa di un altro giocatore...");
 	}
 	
 	public void rejectedRequest() {
-		fi.setLblConnection("La connessione al server è stata rifiutata oppure è fallita.");
+		fi.setLblConnection("La connessione al server e' stata rifiutata oppure è fallita.");
 	}
 
 	@Override

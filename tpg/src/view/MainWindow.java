@@ -66,7 +66,7 @@ public class MainWindow extends JFrame {
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_VERT);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		
@@ -90,6 +90,11 @@ public class MainWindow extends JFrame {
 		preparedGK=new ImageIcon(new ImageIcon("src/immagini/portiereFermo.png").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
 		
 		divingGKLabel=new JLabel("");
+		
+		btnCloseConnection = new JButton("CHIUDI CONNESSIONE");
+		btnCloseConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
+		btnCloseConnection.setBounds(965, 58, 207, 32);
+		contentPane.add(btnCloseConnection);
 		
 		lblRole = new JLabel("RUOLO");
 		lblRole.setHorizontalAlignment(SwingConstants.CENTER);
@@ -267,11 +272,6 @@ public class MainWindow extends JFrame {
 		panel.add(C4);
 		contentPane.add(backgroundLabel);
 		setContentPane(contentPane);
-		
-		btnCloseConnection = new JButton("CHIUDI CONNESSIONE");
-		btnCloseConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
-		btnCloseConnection.setBounds(965, 58, 207, 32);
-		contentPane.add(btnCloseConnection);
 	}
 	
 	public void recordEvent(Controller controller) {
@@ -468,7 +468,7 @@ public class MainWindow extends JFrame {
 				break;
 			case "B4":
 				footballLabel.setIcon(new ImageIcon(new ImageIcon(football).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-				footballLabel.setBounds(980, 340, 60, 60);
+				footballLabel.setBounds(980, 400, 60, 60);
 				break;
 			case "C1":
 				footballLabel.setIcon(new ImageIcon(new ImageIcon(football).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
@@ -535,7 +535,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	public boolean askForNewGame() {
-		int res = JOptionPane.showConfirmDialog(contentPane, "La partita è terminata, vuoi giocare ancora?", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+		int res = JOptionPane.showConfirmDialog(contentPane, "La partita e' terminata, vuoi giocare ancora?", "", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if(res == JOptionPane.YES_OPTION)
 			return true;
 		else

@@ -59,7 +59,7 @@ public class InitialWindow extends JFrame {
 		lblConnection.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConnection.setForeground(Color.WHITE);
 		lblConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
-		lblConnection.setBounds(208, 611, 1124, 41);
+		lblConnection.setBounds(74, 611, 1391, 41);
 		contentPane.add(lblConnection);
 		
 		lblConnect = new JLabel("Connettiti al server");
@@ -105,7 +105,7 @@ public class InitialWindow extends JFrame {
 	public String getIP() {
 		if(validateIPAddress(textField.getText()))
 			return textField.getText();
-		setLblConnection("L'indirizzo inserito non è un indirizzo IP valido.");
+		setLblConnection("L'indirizzo inserito non e' un indirizzo IP valido.");
 		return null;
 	}
 	
