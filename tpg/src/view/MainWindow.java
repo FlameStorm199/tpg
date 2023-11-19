@@ -77,6 +77,8 @@ public class MainWindow extends JFrame {
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		
+		setIconImage(new ImageIcon("src/immagini/palla.png").getImage());
+		
 		try {
 		    //create the font to use. Specify the size!
 		    Font arcade = Font.createFont(Font.TRUETYPE_FONT, new File("resources/ARCADE_N.ttf")).deriveFont(12f);
@@ -98,17 +100,17 @@ public class MainWindow extends JFrame {
 		
 		divingGKLabel=new JLabel("");
 		
-		btnCloseConnection = new JButton("CHIUDI CONNESSIONE");
-		btnCloseConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
-		btnCloseConnection.setBounds(965, 58, 207, 32);
-		contentPane.add(btnCloseConnection);
-		
 		lblDuePunti = new JLabel(":");
 		lblDuePunti.setForeground(Color.BLACK);
 		lblDuePunti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuePunti.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
 		lblDuePunti.setBounds(751, 74, 34, 13);
 		contentPane.add(lblDuePunti);
+		
+		btnCloseConnection = new JButton("CHIUDI CONNESSIONE");
+		btnCloseConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
+		btnCloseConnection.setBounds(965, 58, 207, 32);
+		contentPane.add(btnCloseConnection);
 		
 		panelScore = new JPanel();
 		panelScore.setBounds(658, 58, 220, 46);
@@ -514,7 +516,7 @@ public class MainWindow extends JFrame {
 				break;
 			case "B4":
 				footballLabel.setIcon(new ImageIcon(new ImageIcon(football).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-				footballLabel.setBounds(980, 400, 60, 60);
+				footballLabel.setBounds(980, 395, 60, 60);
 				break;
 			case "C1":
 				footballLabel.setIcon(new ImageIcon(new ImageIcon(football).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
@@ -605,6 +607,6 @@ public class MainWindow extends JFrame {
 	
 	public void opponentDisconnected() {
 		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
-		JOptionPane.showConfirmDialog(contentPane, "L'altro giocatore si è disconnesso dalla partita. Il programma verrà terminato.", "", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showConfirmDialog(contentPane, "L'altro giocatore si e' disconnesso dalla partita. Il programma verra' terminato.", "", JOptionPane.PLAIN_MESSAGE);
 	}
 }

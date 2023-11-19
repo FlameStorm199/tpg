@@ -37,6 +37,8 @@ public class InitialWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
+		setIconImage(new ImageIcon("src/immagini/palla.png").getImage());
+		
 		try {
 		    //create the font to use. Specify the size!
 		    Font arcade = Font.createFont(Font.TRUETYPE_FONT, new File("resources/ARCADE_N.ttf")).deriveFont(12f);
@@ -70,7 +72,7 @@ public class InitialWindow extends JFrame {
 		
 		contentPane.add(lblConnect);
 		
-		textField = new JTextField("25.15.122.173");
+		textField = new JTextField("");
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
 		textField.setBounds(638, 332, 264, 46);
@@ -92,6 +94,11 @@ public class InitialWindow extends JFrame {
 		contentPane.add(backgroundLabel);
 	}
 	
+	private void setIconImage(ImageIcon imageIcon) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void setLblConnection(String conn) {
 		lblConnection.setText(conn);
 		lblConnection.setVisible(true);
