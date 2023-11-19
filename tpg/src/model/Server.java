@@ -8,9 +8,9 @@ public class Server extends Thread {
 	private ServerSocket server; 
 	private Socket clientRequest;
 	private boolean game_started;
-	public Game game;
-	public Shot currentShot;
-	public String broadcastMessage;
+	private Game game;
+	private Shot currentShot;
+	private String broadcastMessage;
 	
 	public Server() { 
 		try { 
@@ -63,4 +63,30 @@ public class Server extends Thread {
 			//e.printStackTrace(); 
 		}
 	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public Shot getCurrentShot() {
+		return currentShot;
+	}
+
+	public void setCurrentShot(Shot currentShot) {
+		this.currentShot = currentShot;
+	}
+
+	public String getBroadcastMessage() {
+		return broadcastMessage;
+	}
+
+	public void setBroadcastMessage(String broadcastMessage) {
+		this.broadcastMessage = broadcastMessage;
+	}
+	
+	
 }

@@ -68,8 +68,7 @@ public class Connection extends Thread {
 			output.writeObject(new Message(Protocol.ASSIGNMENT, this.role));
 			
 			boolean end_connection = false;
-			
-			server.currentShot = new Shot();
+			server.setCurrentShot(new Shot());
 			while(!end_connection) {
 				//System.out.println("Waiting for an operation...");
 				
@@ -84,29 +83,21 @@ public class Connection extends Thread {
 					System.out.println("The address "+connection.getInetAddress().toString()+" has just sent a message of type "+message.getOp() +" that says: \""+message.getMessage()+"\"");
 					switch(message.getOp()) {
 						case SHOOT:
-							server.currentShot.setShot(message.getMessage());
+							server.getCurrentShot().setShot(message.getMessage());
 							result = "Shot received, waiting for save...";
-							if(server.currentShot.getSave() != null) {
+							if(server.getCurrentShot().getSave() != null) {
 								String temp = "";
-								result = server.game.tryShot(server.currentShot);
-								if(this.role.equals("Attaccante"))
-									temp = server.currentShot.getShot()+ "@" +
-											server.currentShot.getSave()+ "@" + 
-											server.game.getShotNumber() + "@" +
-											server.game.getScore1() + "@" + 
-											server.game.getScore2() + "@" + 
-											result;
-								else
-									temp = server.currentShot.getShot()+ "@" +
-											server.currentShot.getSave()+ "@" + 
-											server.game.getShotNumber() + "@" +
-											server.game.getScore2() + "@" + 
-											server.game.getScore1() + "@" + 
-											result;								
-								server.broadcastMessage = temp;
-								server.currentShot = new Shot();
+								result = server.getGame().tryShot(server.getCurrentShot());
+								temp = server.getCurrentShot().getShot()+ "@" +
+										server.getCurrentShot().getSave()+ "@" + 
+										server.getGame().getShotNumber() + "@" +
+										server.getGame().getScore1() + "@" + 
+										server.getGame().getScore2() + "@" + 
+										result;							
+								server.setBroadcastMessage(temp);
+								server.setCurrentShot(new Shot());
 								broadcastReceiver = false;
-								result = server.broadcastMessage;
+								result = server.getBroadcastMessage();
 								message = new Message(Protocol.BROADCAST, result);
 							}else {
 								broadcastReceiver = true;
@@ -115,29 +106,21 @@ public class Connection extends Thread {
 							
 							break;
 						case SAVE:
-							server.currentShot.setSave(message.getMessage());
+							server.getCurrentShot().setSave(message.getMessage());
 							result = "Save received, waiting for shot...";
-							if(server.currentShot.getShot()!=null) {
+							if(server.getCurrentShot().getShot()!=null) {
 								String temp = "";
-								result = server.game.tryShot(server.currentShot);
-								if(this.role.equals("Attaccante"))
-									temp = server.currentShot.getShot()+ "@" +
-											server.currentShot.getSave()+ "@" + 
-											server.game.getShotNumber() + "@" +
-											server.game.getScore1() + "@" + 
-											server.game.getScore2() + "@" + 
-											result;
-								else
-									temp = server.currentShot.getShot()+ "@" +
-											server.currentShot.getSave()+ "@" + 
-											server.game.getShotNumber() + "@" +
-											server.game.getScore2() + "@" + 
-											server.game.getScore1() + "@" + 
-											result;	
-								server.broadcastMessage = temp;
-								server.currentShot = new Shot();
+								result = server.getGame().tryShot(server.getCurrentShot());
+								temp = server.getCurrentShot().getShot()+ "@" +
+										server.getCurrentShot().getSave()+ "@" + 
+										server.getGame().getShotNumber() + "@" +
+										server.getGame().getScore1() + "@" + 
+										server.getGame().getScore2() + "@" + 
+										result;		
+								server.setBroadcastMessage(temp);
+								server.setCurrentShot(new Shot());
 								broadcastReceiver = false;
-								result = server.broadcastMessage;
+								result = server.getBroadcastMessage();
 								message = new Message(Protocol.BROADCAST, result);
 							}else {
 								broadcastReceiver = true;
@@ -152,7 +135,7 @@ public class Connection extends Thread {
 							//TODO: The other client should be warned of this
 							System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
 							end_connection = true;
-							server.game.endGameByForce();
+							server.getGame().endGameByForce();
 							break;
 						default:
 							throw new IOException();
@@ -169,20 +152,20 @@ public class Connection extends Thread {
 						do{
 							//System.out.println();
 							Thread.sleep(1000);
-							if(server.broadcastMessage != null) {
-								output.writeObject(new Message(Protocol.BROADCAST, server.broadcastMessage));
+							if(server.getBroadcastMessage() != null) {
+								output.writeObject(new Message(Protocol.BROADCAST, server.getBroadcastMessage()));
 							}
-						}while(server.broadcastMessage == null);
-						server.broadcastMessage = null;
+						}while(server.getBroadcastMessage() == null);
+						server.setBroadcastMessage(null);
 					}
 					
-					if(server.game.ended()) {
+					if(server.getGame().ended()) {
 						output.writeObject(new Message(Protocol.ENDED));
 						o = input.readObject();
 						if(o instanceof Message) {
 							message = (Message)o;
 							if(message.getOp() == Protocol.ACK)
-								server.game = new Game();
+								server.setGame(new Game());
 							else if(message.getOp() == Protocol.END_CONNECTION) {
 								end_connection = true;
 								System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());

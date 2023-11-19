@@ -15,9 +15,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	private MainWindow v;
 	private Client client;
 	private boolean stop;
-	public String role;
+	private String role;
 	private String initialRole;
-	public String position;
+	private String position;
 	
 	public Controller(MainWindow v, Client client) {
 		this.v = v;
@@ -188,5 +188,21 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void setWindow(MainWindow frame) {
 		this.v = frame;
 		v.recordEvent(this);
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }

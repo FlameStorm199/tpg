@@ -107,8 +107,8 @@ public class Client extends Thread{
 	}
 	
 	public void sendInput() {
-		String role = controller.role;
-		String position = controller.position;
+		String role = controller.getRole();
+		String position = controller.getPosition();
 		try {
 			if(role.equals("Portiere"))
 				output.writeObject(new Message(Protocol.SAVE, position));
