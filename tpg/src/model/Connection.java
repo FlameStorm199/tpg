@@ -136,6 +136,7 @@ public class Connection extends Thread {
 							System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
 							end_connection = true;
 							server.getGame().endGameByForce();
+							server.closeGame(connection.getInetAddress().toString());
 							break;
 						default:
 							throw new IOException();
@@ -159,7 +160,7 @@ public class Connection extends Thread {
 						server.setBroadcastMessage(null);
 					}
 					
-					if(server.getGame().ended()) {
+					if(server.getGame().ended() && !end_connection) {
 						output.writeObject(new Message(Protocol.ENDED));
 						o = input.readObject();
 						if(o instanceof Message) {
@@ -168,6 +169,7 @@ public class Connection extends Thread {
 								server.setGame(new Game());
 							else if(message.getOp() == Protocol.END_CONNECTION) {
 								end_connection = true;
+								server.closeGame(connection.getInetAddress().toString());
 								System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
 							}	
 						}else {

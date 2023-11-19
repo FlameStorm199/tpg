@@ -46,17 +46,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		String[] messages = result.split("@");
 		
 		String ballPosition = messages[0];
-		System.out.println("Posizione palla: "+ballPosition);
 		String gkPosition = messages[1];
-		System.out.println("Posizione portiere: "+gkPosition);
 		String shotNumber = messages[2];
-		System.out.println("Entrambi i giocatori hanno effettuato "+shotNumber+" tiri.");
 		String homeGoals = messages[3];
-		System.out.println("Goal giocatore: "+homeGoals);
 		String awayGoals = messages[4];
-		System.out.println("Goal avversario: "+awayGoals);
 		String shotResult = messages[5];
-		System.out.println("Esito: "+shotResult);
 		v.editGraphics(gkPosition, ballPosition, shotResult);
 		v.editScore(homeGoals, awayGoals);
 	}
@@ -94,6 +88,12 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		this.position = position;
 		stop = true;
 		client.sendInput();
+	}
+	
+	public void opponentDisconnected() {
+		v.opponentDisconnected();
+		v.dispose();
+		System.exit(0);
 	}
 
 	@Override

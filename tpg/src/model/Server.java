@@ -11,6 +11,7 @@ public class Server extends Thread {
 	private Game game;
 	private Shot currentShot;
 	private String broadcastMessage;
+	private Connection[] connections;
 	
 	public Server() { 
 		try { 
@@ -31,7 +32,7 @@ public class Server extends Thread {
 	public void run() { 
 		try {
 			int connectionIndex = 0;
-			Connection[] connections = new Connection[] {null, null};
+			connections = new Connection[] {null, null};
 
 			while (true) {
 				if(game_started) {
@@ -62,6 +63,21 @@ public class Server extends Thread {
 			System.out.println("An IOException has been thrown while the server was running. The program will be terminated.");
 			//e.printStackTrace(); 
 		}
+	}
+	
+	public void closeGame(String address) {
+		try {
+			if(connections[0] == null)
+				connections[1].getOutput().writeObject(new Message(Protocol.END_CONNECTION));
+			else if(connections[1] == null)
+				connections[0].getOutput().writeObject(new Message(Protocol.END_CONNECTION));
+			else if(address.equals(connections[0].getConnection().getInetAddress().toString()))
+				connections[1].getOutput().writeObject(new Message(Protocol.END_CONNECTION));
+			else
+				connections[0].getOutput().writeObject(new Message(Protocol.END_CONNECTION));
+		}catch(Exception e) {
+			System.out.println("An exception has been thrown while closing the connections. The program will be terminated.");
+		}		
 	}
 
 	public Game getGame() {

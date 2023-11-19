@@ -93,6 +93,13 @@ public class Client extends Thread{
 								System.out.println("[SERVER] Nack received.");
 							res = message.getMessage();
 							break;
+						case END_CONNECTION:
+							controller.opponentDisconnected();
+							output.writeObject(new Message(Protocol.END_CONNECTION));
+							input.close();
+							output.close();
+							connection.close();
+							break;
 						default:
 							throw new IOException();	
 					}

@@ -599,8 +599,12 @@ public class MainWindow extends JFrame {
 	}
 
 	public void editScore(String homeGoals, String awayGoals) {
-		// TODO Auto-generated method stub
 		lblN1.setText(homeGoals);
 		lblN2.setText(awayGoals);
+	}
+	
+	public void opponentDisconnected() {
+		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
+		JOptionPane.showConfirmDialog(contentPane, "L'altro giocatore si è disconnesso dalla partita. Il programma verrà terminato.", "", JOptionPane.PLAIN_MESSAGE);
 	}
 }
