@@ -36,7 +36,6 @@ public class InitialWindow extends JFrame {
 	public InitialWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
 		setIconImage(new ImageIcon("src/immagini/palla.png").getImage());
 		
 		try {
@@ -94,11 +93,6 @@ public class InitialWindow extends JFrame {
 		contentPane.add(backgroundLabel);
 	}
 	
-	private void setIconImage(ImageIcon imageIcon) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void setLblConnection(String conn) {
 		lblConnection.setText(conn);
 		lblConnection.setVisible(true);

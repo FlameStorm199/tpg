@@ -28,7 +28,7 @@ public class Connection extends Thread {
 		}
 		catch (IOException e) {
 			System.out.println("An IOException has been thrown while initializing the connection for "+connection.getInetAddress().toString()+". The connection will be terminated.");
-			//e.printStackTrace();
+			System.exit(0);
 		}
 		
 	}
@@ -132,7 +132,6 @@ public class Connection extends Thread {
 							message = new Message(Protocol.NACK, "The client sent a wrong input: "+message.getMessage());
 							break;
 						case END_CONNECTION:
-							//TODO: The other client should be warned of this
 							System.out.println("Connection ended by: "+connection.getInetAddress().toString()+":"+connection.getPort());
 							end_connection = true;
 							server.getGame().endGameByForce();
@@ -186,8 +185,10 @@ public class Connection extends Thread {
 			connection.close();
 		}catch(IOException e) {
 			System.out.println("An IOException has been thrown by the connection "+connection.getInetAddress().toString()+". The connection will be terminated.");
+			System.exit(0);
 		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("An exception has been thrown by the connection "+connection.getInetAddress().toString()+". The connection will be terminated.");
+			System.exit(0);
 		}
 	}
 	

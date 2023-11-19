@@ -25,7 +25,7 @@ public class Server extends Thread {
 		} 
 		catch (IOException e) {
 			System.out.println("An IOException has been thrown while initializing the server. The program will be terminated.");
-			//e.printStackTrace(); 
+			System.exit(0);
 		} 
 	}
 	
@@ -61,7 +61,7 @@ public class Server extends Thread {
 			}
 		}catch (IOException e) { 
 			System.out.println("An IOException has been thrown while the server was running. The program will be terminated.");
-			//e.printStackTrace(); 
+			System.exit(0);
 		}
 	}
 	
@@ -77,6 +77,7 @@ public class Server extends Thread {
 				connections[0].getOutput().writeObject(new Message(Protocol.END_CONNECTION));
 		}catch(Exception e) {
 			System.out.println("An exception has been thrown while closing the connections. The program will be terminated.");
+			System.exit(0);
 		}		
 	}
 

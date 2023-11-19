@@ -33,7 +33,7 @@ public class Client extends Thread{
 		}
 		catch (IOException e) {
 			System.out.println("There was an error while connecting the client to the server. The program will be terminated.");
-            //e.printStackTrace();
+			System.exit(0);
         }
 	}
 	
@@ -69,7 +69,7 @@ public class Client extends Thread{
 							controller.showRole();
 							break;
 						case BROADCAST:
-							System.out.println("[SERVER] Broadcast message: "+message.getMessage());
+							System.out.println("[SERVER] Broadcast message received.");
 							res = message.getMessage();
 							controller.displayShotResult(res);
 							controller.changeRole();
@@ -80,17 +80,11 @@ public class Client extends Thread{
 							controller.askForNewGame();
 							break;
 						case ACK:
-							if(message.getMessage() != null)
-								System.out.println("[SERVER] Ack received: "+message.getMessage());
-							else
-								System.out.println("[SERVER] Ack received.");
+							System.out.println("[SERVER] Ack received.");
 							controller.waitForTurn(message.getMessage());
 							break;
 						case NACK:
-							if(message.getMessage() != null)
-								System.out.println("[SERVER] Nack received: "+message.getMessage());
-							else
-								System.out.println("[SERVER] Nack received.");
+							System.out.println("[SERVER] Nack received.");
 							res = message.getMessage();
 							break;
 						case END_CONNECTION:
@@ -109,6 +103,7 @@ public class Client extends Thread{
 				
 			}catch(Exception e){
 				System.out.println("There was an error while reading the message received from the server. The program will be terminated.");
+				System.exit(0);
 			}
 		}
 	}
@@ -123,6 +118,7 @@ public class Client extends Thread{
 				output.writeObject(new Message(Protocol.SHOOT, position));
 		}catch(Exception e) {
 			System.out.println("There was an error while sending the shot or save to the server. The program will be terminated.");
+			System.exit(0);
 		}
 
 	}
@@ -132,6 +128,7 @@ public class Client extends Thread{
 			output.writeObject(new Message(Protocol.END_CONNECTION));
 		}catch(Exception e) {
 			System.out.println("There was an error while closing the connection to the server. The program will be terminated.");
+			System.exit(0);
 		}
 	}
 	
@@ -140,6 +137,7 @@ public class Client extends Thread{
 			output.writeObject(new Message(Protocol.ACK));
 		}catch(Exception e) {
 			System.out.println("There was an error while trying to start a new game. The program will be terminated.");
+			System.exit(0);
 		}
 	}
 

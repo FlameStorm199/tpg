@@ -6,11 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import model.Client;
 import view.MainWindow;
 
-public class Controller implements ActionListener, MouseListener, KeyListener{
+public class Controller implements ActionListener, MouseListener, KeyListener, WindowListener{
 	
 	private MainWindow v;
 	private Client client;
@@ -47,7 +49,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		
 		String ballPosition = messages[0];
 		String gkPosition = messages[1];
-		String shotNumber = messages[2];
+		//String shotNumber = messages[2];
 		String homeGoals = messages[3];
 		String awayGoals = messages[4];
 		String shotResult = messages[5];
@@ -151,27 +153,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             manageInput("C4");
         }
     }
-	
-	@Override
-	public void keyTyped(KeyEvent e) { }
-
-	@Override
-	public void keyPressed(KeyEvent e) { }
-
-	@Override
-	public void keyReleased(KeyEvent e) { }
-	
-	@Override
-	public void mousePressed(MouseEvent e) { }
-
-	@Override
-	public void mouseReleased(MouseEvent e) { }
-
-	@Override
-	public void mouseEntered(MouseEvent e) { }
-
-	@Override
-	public void mouseExited(MouseEvent e) { }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -183,6 +164,16 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				System.exit(0);
 			}
 			
+		}
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent e) {
+		boolean ok = v.closeConnection();
+		if(ok) {
+			v.dispose();
+			client.closeConnection();
+			System.exit(0);
 		}
 	}
 
@@ -206,4 +197,43 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) { }
+
+	@Override
+	public void keyPressed(KeyEvent e) { }
+
+	@Override
+	public void keyReleased(KeyEvent e) { }
+	
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
+	
+	@Override
+	public void windowOpened(WindowEvent e) { }
+
+	@Override
+	public void windowClosed(WindowEvent e) { }
+
+	@Override
+	public void windowIconified(WindowEvent e) { }
+
+	@Override
+	public void windowDeiconified(WindowEvent e) { }
+
+	@Override
+	public void windowActivated(WindowEvent e) { }
+
+	@Override
+	public void windowDeactivated(WindowEvent e) { }
 }

@@ -18,7 +18,7 @@ public class MainClient {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					System.out.println("An error occurred while loading the client program. The program will be terminated.");
-					//e.printStackTrace();
+					System.exit(0);
 				}
 			}
 		});
