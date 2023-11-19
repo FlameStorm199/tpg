@@ -45,6 +45,7 @@ import java.awt.BorderLayout;
 import javax.swing.ButtonGroup;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.SystemColor;
+import javax.swing.border.MatteBorder;
 
 public class MainWindow extends JFrame {
 
@@ -63,6 +64,12 @@ public class MainWindow extends JFrame {
 	private JLabel lblRole;
 	private JButton btnCloseConnection;
 	private JLabel lblInputReceived;
+	private JPanel panelScore;
+	private JLabel lblH;
+	private JLabel lblN1;
+	private JLabel lblN2;
+	private JLabel lblA;
+	private JLabel lblDuePunti;
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +102,45 @@ public class MainWindow extends JFrame {
 		btnCloseConnection.setFont(new Font("Arcade Normal", Font.PLAIN, 10));
 		btnCloseConnection.setBounds(965, 58, 207, 32);
 		contentPane.add(btnCloseConnection);
+		
+		lblDuePunti = new JLabel(":");
+		lblDuePunti.setForeground(Color.BLACK);
+		lblDuePunti.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDuePunti.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		lblDuePunti.setBounds(751, 74, 34, 13);
+		contentPane.add(lblDuePunti);
+		
+		panelScore = new JPanel();
+		panelScore.setBounds(658, 58, 220, 46);
+		contentPane.add(panelScore);
+		panelScore.setLayout(new GridLayout(0, 4, 0, 0));
+		panelScore.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		lblH = new JLabel("H");
+		lblH.setForeground(Color.BLACK);
+		lblH.setHorizontalAlignment(SwingConstants.CENTER);
+		lblH.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		lblH.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
+		panelScore.add(lblH);
+		
+		lblN1 = new JLabel("0");
+		lblN1.setForeground(Color.BLACK);
+		lblN1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblN1.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		panelScore.add(lblN1);
+		
+		lblN2 = new JLabel("0");
+		lblN2.setForeground(Color.BLACK);
+		lblN2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblN2.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		panelScore.add(lblN2);
+		
+		lblA = new JLabel("A");
+		lblA.setForeground(Color.BLACK);
+		lblA.setFont(new Font("Arcade Normal", Font.PLAIN, 15));
+		lblA.setHorizontalAlignment(SwingConstants.CENTER);
+		lblA.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(0, 0, 0)));
+		panelScore.add(lblA);
 		
 		lblRole = new JLabel("RUOLO");
 		lblRole.setHorizontalAlignment(SwingConstants.CENTER);
@@ -551,5 +597,10 @@ public class MainWindow extends JFrame {
 		lblInputReceived.setVisible(true);
 		lblInputReceived.setText(mess);
 	}
-	
+
+	public void editScore(String homeGoals, String awayGoals) {
+		// TODO Auto-generated method stub
+		lblN1.setText(homeGoals);
+		lblN2.setText(awayGoals);
+	}
 }

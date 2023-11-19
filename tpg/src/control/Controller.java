@@ -39,7 +39,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			v.setLblInputReceived("Scegli un punto in cui tentare la parata");
 		else
 			v.setLblInputReceived("Scegli un punto in cui effettuare il tiro");
-		
 		stop = false;
 	}
 	
@@ -52,13 +51,14 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		System.out.println("Posizione portiere: "+gkPosition);
 		String shotNumber = messages[2];
 		System.out.println("Entrambi i giocatori hanno effettuato "+shotNumber+" tiri.");
-		String playerGoals = messages[3];
-		System.out.println("Goal giocatore: "+playerGoals);
-		String opponentGoals = messages[4];
-		System.out.println("Goal avversario: "+opponentGoals);
+		String homeGoals = messages[3];
+		System.out.println("Goal giocatore: "+homeGoals);
+		String awayGoals = messages[4];
+		System.out.println("Goal avversario: "+awayGoals);
 		String shotResult = messages[5];
 		System.out.println("Esito: "+shotResult);
 		v.editGraphics(gkPosition, ballPosition, shotResult);
+		v.editScore(homeGoals, awayGoals);
 	}
 	
 	public void waitForTurn(String mess) {
@@ -72,6 +72,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void askForNewGame() {
 		boolean ok = v.askForNewGame();
 		if(ok) {
+			v.editScore("0","0");
 			client.newGame();
 			this.role = this.initialRole;
 			showRole();
