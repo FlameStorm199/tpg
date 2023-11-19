@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+
 public class Game {
 	
 	private int score1;
@@ -8,17 +10,17 @@ public class Game {
 	private boolean end_game;
 	
 	public Game() {
-		//RMB: Lo score 1 è SEMPRE dell'utente che calcia per primo e il 2 di quello che calcia per secondo
+		//The first player shooting is ALWAYS score1
 		this.score1 = 0;
 		this.score2 = 0;
 		this.counter = 0;
 		this.end_game = false;
 	}
 	
-	public String tryShot(Shot shot) {
+	public String tryShot(Shot shot) throws IOException{
 		String res="";
 		if(end_game) {
-			res = "The game ended at "+score1+" - "+score2+". Do you want to play a new game?";
+			res = "La partita è terminata con un risultato di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
 		}else {
 			if(counter < 10) {
 				if(counter % 2 == 0) {
@@ -27,11 +29,11 @@ public class Game {
 						score1++;
 						if(score1 > (5-counter/2)+score2)
 							end_game = true;
-						res = "Goal! Current score: "+score1+" - "+score2;
+						res = "Goal! Punteggio attuale: "+score1+" - "+score2;
 					}else {
 						if(score2 > (5-counter/2)+score1)
 							end_game = true;
-						res = "Saved! Current score: "+score1+" - "+score2;
+						res = "Parata! Punteggio attuale: "+score1+" - "+score2;
 					}
 				}else {
 					counter++;
@@ -39,46 +41,64 @@ public class Game {
 						score2++;
 						if(score2 > (5-counter/2)+score1)
 							end_game = true;
-						res = "Goal! Current score: "+score1+" - "+score2;
+						res = "Goal! Punteggio attuale: "+score1+" - "+score2;
 					}else {
 						if(score1 > (5-counter/2)+score2)
 							end_game = true;
-						res = "Saved! Current score: "+score1+" - "+score2;
+						res = "Parata! Punteggio attuale: "+score1+" - "+score2;
 					}
+				}
+				
+				if((counter == 10 && (score1 != score2)) || end_game) {
+					res += "\nLa partita è terminata con un risultato di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
+					end_game = true;
 				}
 			}else {
 				res = tryShotTiebreak(shot);
 			}
 			
-			if((counter == 10 && (score1 != score2)) || end_game) {
-				res += "\nThe game ended at "+score1+" - "+score2+". Do you want to play a new game?";
-				end_game = true;
-			}
+
 		}
 		return res;
 	}
 
-	private String tryShotTiebreak(Shot shot) {
+	public int getScore1() {
+		return score1;
+	}
+
+	public int getScore2() {
+		return score2;
+	}
+	
+	public int getShotNumber() {
+		return (counter / 2);
+	}
+	
+	public void endGameByForce() {
+		this.end_game = true;
+	}
+
+	private String tryShotTiebreak(Shot shot) throws IOException{
 		String res = "";
 		if(counter % 2 == 0) {
 			counter++;
 			if(shot.getShotResult()) {
 				score1++;
-				res = "Goal! Current score: "+score1+" - "+score2;
+				res = "Goal! Punteggio attuale: "+score1+" - "+score2;
 			}else {
-				res = "Saved! Current score: "+score1+" - "+score2;
+				res = "Parata! Punteggio attuale: "+score1+" - "+score2;
 			}
 		}else {
 			counter++;
 			if(shot.getShotResult()) {
 				score2++;
-				res = "Goal! Current score: "+score1+" - "+score2;
+				res = "Goal! Punteggio attuale: "+score1+" - "+score2;
 			}else {
-				res = "Saved! Current score: "+score1+" - "+score2;
+				res = "Parata! Punteggio attuale: "+score1+" - "+score2;
 			}
 			
 			if(score1 != score2) {
-				res += "\nThe game ended at "+score1+" - "+score2+". Do you want to play a new game?";
+				res += "\nLa partita è terminata con un punteggio di "+score1+" - "+score2+". Vuoi giocare un'altra partita?";
 				end_game = true;
 			}	
 		}

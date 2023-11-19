@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+
 public class Shot {
 	public String shot;
 	public String save;
@@ -25,7 +27,7 @@ public class Shot {
 		this.save = save;
 	}
 	
-	public boolean getShotResult() {
+	public boolean getShotResult() throws IOException{
 		char[] temp = save.toCharArray();
 		char saveRow = temp[0];
 		int saveColumn = Integer.parseInt(String.valueOf(temp[1]));
@@ -96,8 +98,7 @@ public class Shot {
 								return true;
 					}
 				default:
-					//TODO: Might need an exception here
-					return false;
+					throw new IOException();
 			}
 		}
 	}

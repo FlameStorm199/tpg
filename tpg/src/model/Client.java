@@ -7,17 +7,17 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import control.Controller;
-import control.ControllerFinestraIniziale;
+import control.InitialWindowController;
 
 public class Client{
 
 	private Socket connection;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
-	private ControllerFinestraIniziale cfi;
+	private InitialWindowController cfi;
 	private Controller controller;
 
-	public Client(String IP, ControllerFinestraIniziale cfi) {
+	public Client(String IP, InitialWindowController cfi) {
 		
 		this.cfi = cfi;
 		
@@ -28,18 +28,19 @@ public class Client{
 			input = new ObjectInputStream(connection.getInputStream());
 		}
 		catch (IOException e) {
-            e.printStackTrace();
+			System.out.println("There was an error while connecting the client to the server. The program will be terminated.");
+            //e.printStackTrace();
         }
 	}
 	
-	public String leggi() {
+	public String read() {
 		String res = "";
 		try {
 			
 			Object o = input.readObject();
 			if(o instanceof Message) {
-				Message op = (Message)o;
-				switch(op.getOp()) {
+				Message message = (Message)o;
+				switch(message.getOp()) {
 					case WAITED:
 						System.out.println("[SERVER] Waited.");
 						cfi.waitRequest();
@@ -58,26 +59,27 @@ public class Client{
 						connection.close();
 						break;
 					case ASSIGNMENT:
-						System.out.println("[SERVER] You were assigned to this role: "+op.getMessage());
-						controller.setInitialRole(op.getMessage());
+						System.out.println("[SERVER] You were assigned to this role: "+message.getMessage());
+						controller.setInitialRole(message.getMessage());
 						break;
 					case BROADCAST:
-						System.out.println("[SERVER] "+op.getMessage());
-						res = op.getMessage();
+						System.out.println("[SERVER] Broadcast message: "+message.getMessage());
+						res = message.getMessage();
 						break;
 					case ACK:
-						if(op.getMessage() != null)
-							System.out.println("[SERVER] "+op.getMessage());
+						if(message.getMessage() != null)
+							System.out.println("[SERVER] Ack received: "+message.getMessage());
 						else
 							System.out.println("[SERVER] Ack received.");
 						
-						res = op.getMessage();
+						res = message.getMessage();
 						break;
 					case NACK:
-						if(op.getMessage() != null)
-							System.out.println("[SERVER] "+op.getMessage());
+						if(message.getMessage() != null)
+							System.out.println("[SERVER] Nack received: "+message.getMessage());
 						else
 							System.out.println("[SERVER] Nack received.");
+						res = message.getMessage();
 						break;
 					default:
 						throw new IOException();	
@@ -87,22 +89,37 @@ public class Client{
 			}
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			System.out.println("There was an error while reading the message received from the server. The program will be terminated.");
 		}
 		return res;
 	}
 	
-	public void scrivi(String role, String position) {
+	public void sendInput(String role, String position) {
 		try {
-			System.out.println(role);
 			if(role.equals("Portiere"))
-				output.writeObject(new Message(Protocollo.SAVE, position));
+				output.writeObject(new Message(Protocol.SAVE, position));
 			else
-				output.writeObject(new Message(Protocollo.SHOOT, position));
+				output.writeObject(new Message(Protocol.SHOOT, position));
 		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("There was an error while sending the shot or save to the server. The program will be terminated.");
 		}
 
+	}
+	
+	public void closeConnection() {
+		try {
+			output.writeObject(new Message(Protocol.END_CONNECTION));
+		}catch(Exception e) {
+			System.out.println("There was an error while closing the connection to the server. The program will be terminated.");
+		}
+	}
+	
+	public void newGame() {
+		try {
+			output.writeObject(new Message(Protocol.ACK));
+		}catch(Exception e) {
+			System.out.println("There was an error while trying to start a new game. The program will be terminated.");
+		}
 	}
 
 	public void setController(Controller controller) {

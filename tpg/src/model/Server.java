@@ -1,68 +1,66 @@
 package model;
 
 import java.io.*; 
-import java.net.*;
-
-import control.ControllerFinestraIniziale; 
+import java.net.*; 
 
 public class Server extends Thread { 
 	
 	private ServerSocket server; 
-	private Socket richiestaClient;
+	private Socket clientRequest;
 	private boolean game_started;
 	public Game game;
 	public Shot currentShot;
 	public String broadcastMessage;
 	
 	public Server() { 
-		//TODO Sistemare i println del server
 		try { 
 			currentShot = null;
 			server = new ServerSocket(20000, 2); 
-			System.out.println("Server attivo");
+			System.out.println("The server is up and running");
 			game_started = false;
 			game = null;
 			broadcastMessage = null;
 			this.start();
 		} 
-		catch (IOException e) { 
-			e.printStackTrace(); 
+		catch (IOException e) {
+			System.out.println("An IOException has been thrown while initializing the server. The program will be terminated.");
+			//e.printStackTrace(); 
 		} 
 	}
 	
 	public void run() { 
 		try {
-			int checkConn = 0;
-			Connessione[] connessioni = new Connessione[] {null, null};
+			int connectionIndex = 0;
+			Connection[] connections = new Connection[] {null, null};
 
 			while (true) {
 				if(game_started) {
-					richiestaClient = server.accept();
-					Connessione temp = new Connessione(richiestaClient, game, this);
+					clientRequest = server.accept();
+					Connection temp = new Connection(clientRequest, game, this);
 					temp.connectionRejected();
 				}
 				
-				System.out.println(checkConn);
 				if(game == null)
 					game = new Game();
-				richiestaClient = server.accept();
-				connessioni[checkConn] = new Connessione(richiestaClient, game, this);
-				checkConn++;
+				clientRequest = server.accept();
+				connections[connectionIndex] = new Connection(clientRequest, game, this);
+				connectionIndex++;
 				
-				if(connessioni[0] != null && connessioni[1] == null) {
-					connessioni[0].waitRequest();
-				}else if(connessioni[0] == null && connessioni[1] != null) {
-					connessioni[1].waitRequest();
-				}else if(connessioni[0] != null && connessioni[1] != null) {
-					connessioni[0].startGame(0);
-					connessioni[1].startGame(1);
+				if(connections[0] != null && connections[1] == null) {
+					connections[0].waitRequest();
+				}else if(connections[0] == null && connections[1] != null) {
+					connections[1].waitRequest();
+				}else if(connections[0] != null && connections[1] != null) {
+					connections[0].startGame(0);
+					connections[1].startGame(1);
 					game_started = true;
-					new Thread(connessioni[0]).start();
-					new Thread(connessioni[1]).start();
+					new Thread(connections[0]).start();
+					new Thread(connections[1]).start();
 				}
 			}
 		}catch (IOException e) { 
-			e.printStackTrace(); 
+			System.out.println("An IOException has been thrown while the server was running. The program will be terminated.");
+			//e.printStackTrace(); 
 		}
 	}
 }

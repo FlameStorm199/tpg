@@ -8,119 +8,145 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import model.Client;
-import view.Window;
+import view.MainWindow;
 
 public class Controller implements ActionListener, MouseListener, KeyListener{
 	
-	private Window v;
+	private MainWindow v;
 	private Client client;
 	private boolean stop;
 	private String role;
+	private String initialRole;
 	
-	public Controller(Window v, Client client) {
+	public Controller(MainWindow v, Client client) {
 		this.v = v;
 		this.client = client;
 		stop = false;
 		role = "Not assigned";
+		initialRole = "Not assigned";
 	}
 	
 	public void setInitialRole(String role) {
 		this.role = role;
-		mostraRuolo();
+		this.initialRole = role;
+		showRole();
 	}
 	
-	public void mostraRuolo() {
-		v.setLblRuolo(role);
+	public void showRole() {
+		v.setLblRole(role);
 	}
 	
 	public void displayShotResult(String result) {
-		//TODO: Mostra in una label questo messaggio, che mostra il risultato del tiro, un messaggio
-		//di aspettare la parata (o il tiro), e/o un messaggio con il risultato finale della partita
+		String[] messages = result.split("@");
 		
-		String posizionePalla = String.valueOf(result.charAt(0)) + String.valueOf(result.charAt(1));
-		System.out.println("Posizione palla: "+posizionePalla);
-		String posizionePortiere = String.valueOf(result.charAt(2)) + String.valueOf(result.charAt(3));
-		System.out.println("Posizione portiere: "+posizionePortiere);
-		String esito = result.substring(4);
-		System.out.println("Esito: "+esito);
-		v.modificaGrafica(posizionePortiere, posizionePalla, esito);
+		String ballPosition = messages[0];
+		System.out.println("Posizione palla: "+ballPosition);
+		String gkPosition = messages[1];
+		System.out.println("Posizione portiere: "+gkPosition);
+		String shotNumber = messages[2];
+		System.out.println("Entrambi i giocatori hanno effettuato "+shotNumber+" tiri.");
+		String playerGoals = messages[3];
+		System.out.println("Goal giocatore: "+playerGoals);
+		String opponentGoals = messages[4];
+		System.out.println("Goal avversario: "+opponentGoals);
+		String shotResult = messages[5];
+		System.out.println("Esito: "+shotResult);
+		v.editGraphics(gkPosition, ballPosition, shotResult);
 	}
 	
 	public void waitForTurn(String mess) {
-		v.setLblInputRicevuto(mess);
+		if(mess.equals("Save received, waiting for shot..."))
+			mess = "Parata ricevuta, in attesa del tiro...";
+		else
+			mess = "Tiro ricevuto, in attesa della parata...";
+		v.setLblInputReceived(mess);
 	}
 	
-	public void gestisciInput(String position) {
-		client.scrivi(this.role, position);
+	public void manageInput(String position) {
+		client.sendInput(this.role, position);
 		stop = true;
-		String mess = client.leggi();
+		String mess = client.read();
 		if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
 			waitForTurn(mess);
-			mess = client.leggi();
+			mess = client.read();
 		}
 			
 		displayShotResult(mess);
+		mess = client.read();
+		if(mess.equals("Game ended")) {
+			boolean ok = v.askForNewGame();
+			if(ok) {
+				client.newGame();
+				this.role = this.initialRole;
+				showRole();
+			}else {
+				v.dispose();
+				client.closeConnection();
+				System.exit(0);
+			}
+		}
+		
 		if(this.role.equals("Portiere"))
 			this.role = "Attaccante";
 		else
 			this.role = "Portiere";
-		mostraRuolo();
+		showRole();
 		stop = false;
 	}
 
 	@Override
     public void mouseClicked(MouseEvent e) {
         if(stop) {
-        	v.stampaAttesa();
+        	v.printWaitMessage();
             return;
         }
 
         if (e.getSource() == v.getA1()) {
-            gestisciInput("A1");
+            manageInput("A1");
         }
 
         if (e.getSource() == v.getA2()) {
-            gestisciInput("A2");
+            manageInput("A2");
         }
 
         if (e.getSource() == v.getA3()) {
-            gestisciInput("A3");
+            manageInput("A3");
         }
 
         if (e.getSource() == v.getA4()) {
-            gestisciInput("A4");
+            manageInput("A4");
         }
 
         if (e.getSource() == v.getB1()) {
-            gestisciInput("B1");
+            manageInput("B1");
         }
 
         if (e.getSource() == v.getB2()) {
-            gestisciInput("B2");
+            manageInput("B2");
         }
 
         if (e.getSource() == v.getB3()) {
-            gestisciInput("B3");
+            manageInput("B3");
         }
         
         if (e.getSource() == v.getB4()) {
-            gestisciInput("B4");
+            manageInput("B4");
         }
 
         if (e.getSource() == v.getC1()) {
-            gestisciInput("C1");
+            manageInput("C1");
         }
 
         if (e.getSource() == v.getC2()) {
-            gestisciInput("C2");
+            manageInput("C2");
         }
 
         if (e.getSource() == v.getC3()) {
-            gestisciInput("C3");
+            manageInput("C3");
         }
 
         if (e.getSource() == v.getC4()) {
-            gestisciInput("C4");
+            manageInput("C4");
         }
     }
 	
@@ -146,12 +172,21 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void actionPerformed(ActionEvent e) { }
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == v.getBtnCloseConnection()) {
+			boolean ok = v.closeConnection();
+			if(ok) {
+				v.dispose();
+				client.closeConnection();
+				System.exit(0);
+			}
+			
+		}
+	}
 
-	public void setWindow(Window frame) {
-		// TODO Auto-generated method stub
+	public void setWindow(MainWindow frame) {
 		this.v = frame;
-		v.registraEvento(this);
-		this.client.leggi();
+		v.recordEvent(this);
+		this.client.read();
 	}
 }

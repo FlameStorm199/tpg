@@ -1,6 +1,6 @@
 package model;
 
-public enum Protocollo {
+public enum Protocol {
 	WAITED,
 	ACCEPTED,
 	REJECTED,
