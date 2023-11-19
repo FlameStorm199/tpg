@@ -44,6 +44,8 @@ import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import javax.swing.ButtonGroup;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 
@@ -72,18 +74,15 @@ public class MainWindow extends JFrame {
 	private JLabel lblDuePunti;
 	
 	public MainWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
 		setIconImage(new ImageIcon("src/immagini/palla.png").getImage());
 		
 		try {
-		    //create the font to use. Specify the size!
 		    Font arcade = Font.createFont(Font.TRUETYPE_FONT, new File("resources/ARCADE_N.ttf")).deriveFont(12f);
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		    //register the font
 		    ge.registerFont(arcade);
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -336,6 +335,7 @@ public class MainWindow extends JFrame {
 		C3.addMouseListener(controller);
 		C4.addMouseListener(controller);
 		btnCloseConnection.addActionListener(controller);
+		this.addWindowListener(controller);
 	}
 
 	public JLabel getA1() {
