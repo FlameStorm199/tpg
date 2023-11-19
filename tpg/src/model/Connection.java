@@ -177,7 +177,7 @@ public class Connection extends Thread {
 					}
 					
 					if(server.game.ended()) {
-						output.writeObject(new Message(Protocol.ACK, "Game ended"));
+						output.writeObject(new Message(Protocol.ENDED));
 						o = input.readObject();
 						if(o instanceof Message) {
 							message = (Message)o;
@@ -191,8 +191,6 @@ public class Connection extends Thread {
 							throw new IOException();
 						}
 					}
-					else
-						output.writeObject(new Message(Protocol.ACK, "Game not ended"));
 				}else {
 					throw new IOException();
 				}

@@ -15,8 +15,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	private MainWindow v;
 	private Client client;
 	private boolean stop;
-	private String role;
+	public String role;
 	private String initialRole;
+	public String position;
 	
 	public Controller(MainWindow v, Client client) {
 		this.v = v;
@@ -34,6 +35,12 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	public void showRole() {
 		v.setLblRole(role);
+		if(this.role.equals("Portiere"))
+			v.setLblInputReceived("Scegli un punto in cui tentare la parata");
+		else
+			v.setLblInputReceived("Scegli un punto in cui effettuare il tiro");
+		
+		stop = false;
 	}
 	
 	public void displayShotResult(String result) {
@@ -62,41 +69,30 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		v.setLblInputReceived(mess);
 	}
 	
-	public void manageInput(String position) {
-		client.sendInput(this.role, position);
-		stop = true;
-		String mess = client.read();
-		if(mess.equals("Save received, waiting for shot...") || mess.equals("Shot received, waiting for save...")) {
-			waitForTurn(mess);
-			mess = client.read();
+	public void askForNewGame() {
+		boolean ok = v.askForNewGame();
+		if(ok) {
+			client.newGame();
+			this.role = this.initialRole;
+			showRole();
+		}else {
+			v.dispose();
+			client.closeConnection();
+			System.exit(0);
 		}
-			
-		displayShotResult(mess);
-		mess = client.read();
-		if(mess.equals("Game ended")) {
-			boolean ok = v.askForNewGame();
-			if(ok) {
-				client.newGame();
-				this.role = this.initialRole;
-				showRole();
-			}else {
-				v.dispose();
-				client.closeConnection();
-				System.exit(0);
-			}
-		}
-		
+	}
+	
+	public void changeRole() {
 		if(this.role.equals("Portiere"))
 			this.role = "Attaccante";
 		else
 			this.role = "Portiere";
-		showRole();
-		if(this.role.equals("Portiere"))
-			v.setLblInputReceived("Scegli un punto in cui tentare la parata");
-		else
-			v.setLblInputReceived("Scegli un punto in cui effettuare il tiro");
-		
-		stop = false;
+	}
+	
+	public void manageInput(String position) {
+		this.position = position;
+		stop = true;
+		client.sendInput();
 	}
 
 	@Override
@@ -192,6 +188,5 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	public void setWindow(MainWindow frame) {
 		this.v = frame;
 		v.recordEvent(this);
-		this.client.read();
 	}
 }

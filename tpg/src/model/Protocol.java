@@ -6,6 +6,7 @@ public enum Protocol {
 	REJECTED,
 	ASSIGNMENT,
 	BROADCAST,
+	ENDED,
 	SHOOT,
 	SAVE,
 	ACK,

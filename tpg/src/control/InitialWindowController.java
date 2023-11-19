@@ -26,11 +26,7 @@ public class InitialWindowController implements ActionListener, MouseListener{
 	
 	public void acceptedRequest() {
 		fi.dispose();
-		Client c = this.client;
-		Controller controller = new Controller(null, c);
-		client.setController(controller);
-		controller.setWindow(frame);
-		frame.setVisible(true);
+		this.frame.setVisible(true);
 	}
 	
 	public void waitRequest() {
@@ -50,30 +46,13 @@ public class InitialWindowController implements ActionListener, MouseListener{
 		if(e.getSource() == fi.getLblConnect()) {
 			if(fi.getIP() == null)
 				return;
-			this.client = new Client(fi.getIP(), this);
-			String mess = "";
-			mess = client.read();
-			if(!mess.equals("Game started")) {
-				try {
-					System.out.println("Entra");
-					fi.setLblConnection("La connessione al server è avvenuta con successo, in attesa di un altro giocatore...");
-					System.out.println("Entra x2");
-					Thread.sleep(5000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				client.read();
-			}
-			/*while(!mess.equals("Game started")) {
-				try {
-					fi.setLblConnection("La connessione al server è avvenuta con successo, in attesa di un altro giocatore...");
-					Thread.sleep(5000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				mess = client.read();
-			}*/
-				
+			
+			this.client = new Client(fi.getIP(), this, null);
+			Controller controller = new Controller(this.frame, this.client);
+			controller.setWindow(this.frame);
+			client.setController(controller);
+			
+			new Thread(this.client).start();	
 		}
 	}
 
