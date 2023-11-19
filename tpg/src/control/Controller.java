@@ -91,6 +91,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		else
 			this.role = "Portiere";
 		showRole();
+		if(this.role.equals("Portiere"))
+			v.setLblInputReceived("Scegli un punto in cui tentare la parata");
+		else
+			v.setLblInputReceived("Scegli un punto in cui effettuare il tiro");
+		
 		stop = false;
 	}
 

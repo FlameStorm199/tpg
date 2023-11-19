@@ -50,7 +50,7 @@ public class InitialWindow extends JFrame {
 		lblConnect.setForeground(new Color(255, 255, 255));
 		lblConnect.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConnect.setFont(new Font("Arcade Normal", Font.PLAIN, 20));
-		lblConnect.setBounds(684, 422, 172, 41);
+		lblConnect.setBounds(524, 429, 490, 41);
 		
 		contentPane.add(lblConnect);
 		

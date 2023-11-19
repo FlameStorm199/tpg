@@ -64,7 +64,7 @@ public class MainWindow extends JFrame {
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setExtendedState(JFrame.MAXIMIZED_VERT);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		
@@ -351,12 +351,10 @@ public class MainWindow extends JFrame {
 	
 	private void showShotResult(String shotResult) {
 		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
-		int r=JOptionPane.showConfirmDialog(contentPane, shotResult, "", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-		if(r==JOptionPane.OK_OPTION) {
-			preparedGKLabel.setVisible(true);
-			footballLabel.setVisible(false);
-			divingGKLabel.setVisible(false);
-		}
+		JOptionPane.showConfirmDialog(contentPane, shotResult, "", JOptionPane.PLAIN_MESSAGE);
+		preparedGKLabel.setVisible(true);
+		footballLabel.setVisible(false);
+		divingGKLabel.setVisible(false);
 	}
 
 	private void editGK(String pos) {
@@ -532,7 +530,7 @@ public class MainWindow extends JFrame {
 
 	public void printWaitMessage() {
 		UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Arcade Normal", Font.PLAIN, 14)));
-		int r=JOptionPane.showConfirmDialog(contentPane, "Attendi il tuo turno!", "", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showConfirmDialog(contentPane, "Attendi il tuo turno!", "", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public void setLblInputReceived(String mess) {
