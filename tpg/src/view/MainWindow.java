@@ -27,8 +27,10 @@ import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -67,6 +69,18 @@ public class MainWindow extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_VERT);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
+		
+		try {
+		    //create the font to use. Specify the size!
+		    Font arcade = Font.createFont(Font.TRUETYPE_FONT, new File("resources/ARCADE_N.ttf")).deriveFont(12f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    //register the font
+		    ge.registerFont(arcade);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
 		
 		backgroundLabel = new JLabel("");
 		backgroundLabel.setBounds(345, 0, 850, 781);
